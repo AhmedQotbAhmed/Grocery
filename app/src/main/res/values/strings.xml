@@ -2,13 +2,16 @@
     <string name="app_name">Grocery</string>
 
     <string name="wlc_text">
-  <![CDATA[
-    <b>Welcome to</b> <br/>
-    <bold>Grocery</bold>
-    <b>Shopping</b> <br/>
+    <small>Welcome to </small> <br/>
+   <strong> <b><b>Grocery</b></b></strong>
+    <small>Shopping</small> <br/>
+    </string>
 
-  ]]>
-</string>
+    <string name="wlc_text_signUp">
+    <strong>Welcome to</strong>
+   <strong><b><b>Grocery</b></b></strong>
+    <small>App</small> <br/>
+    </string>
 
 </resources>
 

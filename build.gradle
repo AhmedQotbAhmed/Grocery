@@ -18,6 +18,8 @@ allprojects {
     repositories {
         google()
         jcenter()
+        // doubleClick url
+        maven { url 'https://jitpack.io' }
         
     }
 }
