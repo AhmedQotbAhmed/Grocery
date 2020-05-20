@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">Grocery</string>
+
+    <string name="wlc_text">
+  <![CDATA[
+    <b>Welcome to</b> <br/>
+    <bold>Grocery</bold>
+    <b>Shopping</b> <br/>
+
+  ]]>
+</string>
+
+</resources>
+
