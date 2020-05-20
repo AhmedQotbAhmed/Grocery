@@ -2,16 +2,19 @@
     <string name="app_name">Grocery</string>
 
     <string name="wlc_text">
-    <small>Welcome to </small> <br/>
+    <small>Welcome to </small> <br />
    <strong> <b><b>Grocery</b></b></strong>
-    <small>Shopping</small> <br/>
+    <small>Shopping</small> <br />
     </string>
 
     <string name="wlc_text_signUp">
     <strong>Welcome to</strong>
    <strong><b><b>Grocery</b></b></strong>
-    <small>App</small> <br/>
+    <small>App</small> <br />
     </string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>
 

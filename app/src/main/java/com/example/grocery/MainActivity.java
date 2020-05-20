@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.item_cart);
 
 
         SignIn=findViewById(R.id.sign_in_btn);
@@ -33,25 +33,25 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
 
-        SignUp.setOnClickListener(this);
-        frg_btn.setOnClickListener(this);
-       // doubleClick is
-        //"A android library lo handle double click on android Views components. You just need to call it on your view
-        // in  https://github.com/pedromassango/doubleClick imp "
-        SignIn.setOnClickListener( new DoubleClick(new DoubleClickListener() {
-            @Override
-            public void onSingleClick(View view) {
-                signIn_Content.setVisibility(View.VISIBLE);
-                Toast.makeText(getApplicationContext(),"DoubleClick to SignIn ",Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onDoubleClick(View view) {
-                signIn_Content.setVisibility(View.INVISIBLE);
-                startActivity( new Intent(MainActivity.this,SignUpActivity.class));
-
-            }
-        })  );
+//        SignUp.setOnClickListener(this);
+//        frg_btn.setOnClickListener(this);
+//       // doubleClick is
+//        //"A android library lo handle double click on android Views components. You just need to call it on your view
+//        // in  https://github.com/pedromassango/doubleClick imp "
+//        SignIn.setOnClickListener( new DoubleClick(new DoubleClickListener() {
+//            @Override
+//            public void onSingleClick(View view) {
+//                signIn_Content.setVisibility(View.VISIBLE);
+//                Toast.makeText(getApplicationContext(),"DoubleClick to SignIn ",Toast.LENGTH_SHORT).show();
+//            }
+//
+//            @Override
+//            public void onDoubleClick(View view) {
+//                signIn_Content.setVisibility(View.INVISIBLE);
+//                startActivity( new Intent(MainActivity.this,SignUpActivity.class));
+//
+//            }
+//        })  );
 
 
 
