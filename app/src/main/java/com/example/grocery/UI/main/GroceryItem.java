@@ -12,7 +12,6 @@ public class GroceryItem {
     private StorageReference mStorageRef;
     private Uri uri=null;
     private DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
-    mStorageRef = FirebaseStorage.getInstance().getReference();
     DatabaseReference ref=  FirebaseDatabase.getInstance().getReference();
 
 }

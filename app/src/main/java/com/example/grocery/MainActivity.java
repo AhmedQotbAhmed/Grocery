@@ -6,14 +6,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.grocery.model.User;
+import com.example.grocery.prevalent.Prevalent;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -21,6 +24,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.pedromassango.doubleclick.DoubleClick;
 import com.pedromassango.doubleclick.DoubleClickListener;
+
+import io.paperdb.Paper;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -31,6 +36,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private EditText email_edt;
     private EditText password_edt;
     private ProgressDialog loadingBar;
+    private CheckBox chBx_rememberMe;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +50,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         frg_btn=findViewById(R.id.forgotPass_btn);
         signIn_Content=findViewById(R.id.sign_in_content);
         loadingBar=new ProgressDialog(this);
+        chBx_rememberMe=findViewById(R.id.chBx_RememberMe);
+        Paper.init(this);
 
 
 
@@ -63,14 +71,29 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             public void onDoubleClick(View view) {
                 signIn_Content.setVisibility(View.INVISIBLE);
                 LoginUser();
-                startActivity( new Intent(MainActivity.this,SignUpActivity.class));
+
 
             }
         })  );
 
+        String userEmailKey=Paper.book().read(Prevalent.userEmailKey);
+        String userPasswordKey=Paper.book().read(Prevalent.userPasswordKey);
+
+        if (userEmailKey!=null&&userPasswordKey!=null){
+            if(!userEmailKey.isEmpty()&&!userPasswordKey.isEmpty()){
+                AllowAccessToAccount( userEmailKey,userPasswordKey);
+
+            }
+
+
+        }
+
+
+
 
 
     }
+
 
     private void LoginUser() {
 
@@ -103,6 +126,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void AllowAccessToAccount(final String email_str, final String password_str) {
+        if (chBx_rememberMe.isChecked()){
+            Paper.book().write(Prevalent.userEmailKey,email_str);
+            Paper.book().write(Prevalent.userPasswordKey,password_str);
+        }
 
         final DatabaseReference rootRef;
         rootRef= FirebaseDatabase.getInstance().getReference();
@@ -134,7 +161,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-
+                Log.e(" logIn onCancelled",databaseError.toString());
             }
         });
 
@@ -152,5 +179,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 break;
         }
+    }
+
+    public void logout(){
+        Paper.book().destroy();
+
     }
 }

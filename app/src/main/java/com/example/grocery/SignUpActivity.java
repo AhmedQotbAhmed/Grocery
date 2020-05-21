@@ -3,6 +3,7 @@ package com.example.grocery;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
@@ -28,6 +29,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     private Button SignUp;
     private FirebaseDatabase database ;
     private ProgressDialog loadingBar;
+    final DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +54,8 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.sign_up_btn_act:
-                    startActivity( new Intent(this,MainActivity.class));
+                CreateAccont();
+
                 break;
 
         }
@@ -72,46 +75,46 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
             password.requestFocus();
             validation=false;
         }
-        if (email_Str.isEmpty()) {
+        else if (email_Str.isEmpty()) {
             email.setError("Email is required");
             email.requestFocus();
             validation=false;
         }
-        if (password_Str.isEmpty() || repassword_Str.isEmpty()) {
+        else  if (password_Str.isEmpty() || repassword_Str.isEmpty()) {
             password.setError("Password is required");
             repassword.setError("Password is required");
             password.requestFocus();
             validation=false;
         }
-        if (!password_Str.equals(repassword_Str)) {
+        else if (!password_Str.equals(repassword_Str)) {
             repassword.setError("Password doesn't match");
             password.setError("Password doesn't match");
             repassword.requestFocus();
             validation=false;
         }
-        if (Lname_Str.isEmpty()) {
+        else if (Lname_Str.isEmpty()) {
             Lname.setError("Lname is required");
             Lname.requestFocus();
             validation=false;
         }
-        if (Fname_Str.isEmpty()) {
+        else if (Fname_Str.isEmpty()) {
             Fname.setError("Fname is required");
             Fname.requestFocus();
             validation=false;
         }
-        if (mobile_Str.isEmpty()) {
+        else  if (mobile_Str.isEmpty()) {
             mobile_num.setError("mobile is required");
             mobile_num.requestFocus();
             validation=false;
         }
-          if (!Patterns.EMAIL_ADDRESS.matcher(email_Str).matches()) {
+        else    if (!Patterns.EMAIL_ADDRESS.matcher(email_Str).matches()) {
             email.setError(" please Enter a valid email");
             email.requestFocus();
             validation=false;
              }
 
-        if (validation){
-
+        else {
+            Log.e("hello","hello");
             loadingBar.setTitle("Create Account");
             loadingBar.setMessage("Please wait, while we are checking the credentials");
             loadingBar.setCanceledOnTouchOutside(false);
@@ -126,37 +129,41 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     }
 
     private void validationEmail(final String fname_str, final String lname_str, final String email_str, final String password_str, final String mobile_str) {
-        final DatabaseReference rootRef;
-        rootRef=FirebaseDatabase.getInstance().getReference();
+
+        final String email= (email_str.replace("@","-")).replace(".","_");
+        Log.e("validationEmail","hello");
         rootRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if(!dataSnapshot.child("Users").child(email_str).exists()){
+                if(!dataSnapshot.child("Users").child(email).exists()){
                     HashMap<String,Object> userDataMap =new HashMap<>();
                     userDataMap.put("fname",fname_str);
                     userDataMap.put("lname",lname_str);
                     userDataMap.put("email",email_str);
                     userDataMap.put("password",password_str);
                     userDataMap.put("mobile",mobile_str);
-                    rootRef.child("Users").updateChildren(userDataMap)
+                    rootRef.child("Users").child(email).updateChildren(userDataMap)
                             .addOnCompleteListener(new OnCompleteListener<Void>(){
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
                                     if (task.isSuccessful()){
-                                        Toast.makeText(SignUpActivity.this,"Congratulations, your account has been created",Toast.LENGTH_LONG).show();
-                                    loadingBar.dismiss();
-                                    startActivity(new Intent(SignUpActivity.this,MainActivity.class));
+                                        Toast.makeText(SignUpActivity.this, "Congratulations," +
+                                                "your account has been created", Toast.LENGTH_LONG).show();
+                                        Log.e("errrror","hello");
+                                        startActivity(new Intent(SignUpActivity.this,MainActivity.class));
+                                        loadingBar.dismiss();
                                     }
                                     else{
-                                        loadingBar.dismiss();
+                                        Log.e("else","else");
                                         Toast.makeText(SignUpActivity.this,"Network Error: please try again...",Toast.LENGTH_LONG).show();
+                                        loadingBar.dismiss();
 
                                     }
                                 }
                             });
                 }
                 else {
-
+                    Log.e("already","already");
                     Toast.makeText(SignUpActivity.this,"this "+email_str+"already exists",Toast.LENGTH_LONG).show();
                     loadingBar.dismiss();
                     Toast.makeText(SignUpActivity.this,"Please try anther email",Toast.LENGTH_LONG).show();
@@ -165,6 +172,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.e("sign up onCancelled",databaseError.toString());
 
             }
         });
