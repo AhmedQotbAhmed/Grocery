@@ -97,6 +97,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             loadingBar.setCanceledOnTouchOutside(false);
             loadingBar.show();
             AllowAccessToAccount(email_Str,password_Str);
+
         }
 
     }
@@ -113,9 +114,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     if(userData.getEmail().equals(email_str)){
                         if(userData.getPassword().equals(password_str)){
                             loadingBar.dismiss();
-
-
+                            startActivity(new Intent(MainActivity.this,HomeActivity.class));
                         }
+                        else {
+                            loadingBar.dismiss();
+                            email_edt.setError("password is incorrect");
+                        }
+
                     }
 
 
@@ -124,8 +129,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 else {
                     loadingBar.dismiss();
                     email_edt.setError("Email do not exists");
-
-
                 }
             }
 

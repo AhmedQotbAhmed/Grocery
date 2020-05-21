@@ -1,4 +1,4 @@
-package com.example.grocery.UI.main;
+package com.example.grocery;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -12,5 +12,6 @@ public class HomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
     }
 }

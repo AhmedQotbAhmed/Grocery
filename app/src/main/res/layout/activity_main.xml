@@ -101,16 +101,17 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
-            android:id="@+id/forgotPass_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="left"
             android:layout_marginStart="40dp"
+            android:layout_marginLeft="30dp"
             android:layout_marginTop="20dp"
-            android:layout_marginRight="30dp"
             android:layout_marginBottom="10dp"
             android:text="Forgot Password ? "
             android:textColor="#000"
-            android:textSize="12dp" />
+            android:textSize="12sp"
+            tools:ignore="RtlHardcoded" />
 
     </LinearLayout>
 
