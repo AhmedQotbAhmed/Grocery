@@ -11,6 +11,9 @@ public class User {
         this.password = password;
         this.mobile = mobile;
     }
+    public User() {
+
+    }
 
     public void setLname(String lname) {
         this.lname = lname;

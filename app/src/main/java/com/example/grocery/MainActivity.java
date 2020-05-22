@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private EditText password_edt;
     private ProgressDialog loadingBar;
     private CheckBox chBx_rememberMe;
-
+    private final DatabaseReference rootRef= FirebaseDatabase.getInstance().getReference();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,13 +53,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         chBx_rememberMe=findViewById(R.id.chBx_RememberMe);
         Paper.init(this);
 
-
-
         SignUp.setOnClickListener(this);
         frg_btn.setOnClickListener(this);
-       // doubleClick is
+        // doubleClick is
         //"A android library lo handle double click on android Views components. You just need to call it on your view
         // in  https://github.com/pedromassango/doubleClick imp "
+
         SignIn.setOnClickListener( new DoubleClick(new DoubleClickListener() {
             @Override
             public void onSingleClick(View view) {
@@ -130,14 +129,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Paper.book().write(Prevalent.userEmailKey,email_str);
             Paper.book().write(Prevalent.userPasswordKey,password_str);
         }
+        final String email= (email_str.replace("@","-")).replace(".","_");
 
-        final DatabaseReference rootRef;
-        rootRef= FirebaseDatabase.getInstance().getReference();
+
         rootRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if(dataSnapshot.child("Users").child(email_str).exists()){
-                    User userData= dataSnapshot.child("Users").child(email_str).getValue(User.class);
+                if(dataSnapshot.child("Users").child(email).exists()){
+                    User userData= dataSnapshot.child("Users").child(email).getValue(User.class);
                     if(userData.getEmail().equals(email_str)){
                         if(userData.getPassword().equals(password_str)){
                             loadingBar.dismiss();
