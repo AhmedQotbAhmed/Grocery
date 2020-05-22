@@ -1,12 +1,12 @@
 package com.example.grocery.model;
 
-public class Post {
+public class Posts {
     private String price_str;
     private String name_str;
     private String itemCategory;
     private String url = null;
 
-    public Post() {
+    public Posts() {
     }
 
     public String getUri() {

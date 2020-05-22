@@ -20,6 +20,7 @@ public class HomeActivity extends AppCompatActivity {
 
 
 
+
         tabLayout = findViewById(R.id.tabLayout_home);
         viewPager = findViewById(R.id.viewPager_home);
         tabLayout.setTabTextColors(getResources().getColor(R.color.colorPrimary),getResources().getColor(R.color.colorAccent));

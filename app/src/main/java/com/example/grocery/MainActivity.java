@@ -73,13 +73,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onSingleClick(View view) {
                 signIn_Content.setVisibility(View.VISIBLE);
-                Toast.makeText(getApplicationContext(),"DoubleClick to SignIn ",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(),"Double Click to SignIn ",Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onDoubleClick(View view) {
+                String email_Str = email_edt.getText().toString();
+                String password_Str = password_edt.getText().toString();
+                if (!email_Str.isEmpty()&&!password_Str.isEmpty()){
                 signIn_Content.setVisibility(View.INVISIBLE);
-                LoginUser();
+                LoginUser();}
+                else {
+                    email_edt.setError("Email is required");
+                    password_edt.setError("password is required");
+
+                }
+
 
 
             }
