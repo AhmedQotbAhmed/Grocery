@@ -29,9 +29,6 @@ import io.paperdb.Paper;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private Button SignUp;
-    private Button SignIn;
-    private TextView frg_btn;
     private LinearLayout signIn_Content;
     private EditText email_edt;
     private EditText password_edt;
@@ -45,14 +42,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         email_edt=findViewById(R.id.email_signIn);
         password_edt=findViewById(R.id.pass_signIn);
-        SignIn=findViewById(R.id.sign_in_btn);
-        SignUp=findViewById(R.id.sign_up_btn);
-        frg_btn=findViewById(R.id.forgotPass_btn);
+        Button signIn = findViewById(R.id.sign_in_btn);
+        Button signUp = findViewById(R.id.sign_up_btn);
+        TextView frg_btn = findViewById(R.id.forgotPass_btn);
         signIn_Content=findViewById(R.id.sign_in_content);
         loadingBar=new ProgressDialog(this);
         chBx_rememberMe=findViewById(R.id.chBx_RememberMe);
 
-        SignUp.setOnClickListener(this);
+        signUp.setOnClickListener(this);
         frg_btn.setOnClickListener(this);
 
         Paper.init(this);
@@ -64,12 +61,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             if(!userEmailKey.isEmpty()&&!userPasswordKey.isEmpty()){
                 AllowAccessToAccount( userEmailKey,userPasswordKey);
 
-            }
+            }}
         // doubleClick is
         //"A android library lo handle double click on android Views components. You just need to call it on your view
         // in  https://github.com/pedromassango/doubleClick imp "
 
-        SignIn.setOnClickListener( new DoubleClick(new DoubleClickListener() {
+        signIn.setOnClickListener( new DoubleClick(new DoubleClickListener() {
             @Override
             public void onSingleClick(View view) {
                 signIn_Content.setVisibility(View.VISIBLE);
@@ -82,7 +79,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 String password_Str = password_edt.getText().toString();
                 if (!email_Str.isEmpty()&&!password_Str.isEmpty()){
                 signIn_Content.setVisibility(View.INVISIBLE);
-                LoginUser();}
+                LoginUser();
+                }
                 else {
                     email_edt.setError("Email is required");
                     password_edt.setError("password is required");
@@ -99,11 +97,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         }
 
-
-
-
-
-    }
 
 
     private void LoginUser() {

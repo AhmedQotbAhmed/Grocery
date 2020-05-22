@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.grocery.R;
-import com.example.grocery.UI.main.StoreItemViewHolder;
+import com.example.grocery.UI.main.StoreItemAdapter;
 import com.example.grocery.model.Posts;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DatabaseReference;
@@ -56,7 +56,7 @@ public class StoreFragment extends Fragment {
         recyclerView_Vegetables.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false));
         recyclerView_Other.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false));
 
-        getProducts();
+
 //                adaptor = new CartAdapter();
 //                recyclerView.setAdapter(adaptor);
 
@@ -74,23 +74,20 @@ public class StoreFragment extends Fragment {
     FirebaseRecyclerOptions<Posts> options__Other = new FirebaseRecyclerOptions.Builder<Posts>()
                 .setQuery(postReference_Other, Posts.class).build();
 
-        StoreItemViewHolder adaptor_Fruit = new StoreItemViewHolder(options_Fruit);
+        StoreItemAdapter adaptor_Fruit = new StoreItemAdapter(options_Fruit);
         recyclerView_Fruit.setAdapter(adaptor_Fruit);
         adaptor_Fruit.startListening();
 
-        StoreItemViewHolder adaptor_Vegetables = new StoreItemViewHolder(options_Vegetables);
+        StoreItemAdapter adaptor_Vegetables = new StoreItemAdapter(options_Vegetables);
         recyclerView_Vegetables.setAdapter(adaptor_Vegetables);
         adaptor_Vegetables.startListening();
 
-        StoreItemViewHolder adaptor_Other = new StoreItemViewHolder(options__Other);
+        StoreItemAdapter adaptor_Other = new StoreItemAdapter(options__Other);
         recyclerView_Other.setAdapter(adaptor_Other);
         adaptor_Other.startListening();
 
     }
 
-    private void getProducts() {
 
-
-    }
 
 }

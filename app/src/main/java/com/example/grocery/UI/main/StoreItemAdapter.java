@@ -16,7 +16,7 @@ import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.squareup.picasso.Picasso;
 
-public class StoreItemViewHolder extends FirebaseRecyclerAdapter<Posts, StoreItemViewHolder.ItemViewHolder> {
+public class StoreItemAdapter extends FirebaseRecyclerAdapter<Posts, StoreItemAdapter.ItemViewHolder> {
 
 
     /**
@@ -25,7 +25,7 @@ public class StoreItemViewHolder extends FirebaseRecyclerAdapter<Posts, StoreIte
      *
      * @param options
      */
-    public StoreItemViewHolder(@NonNull FirebaseRecyclerOptions<Posts> options) {
+    public StoreItemAdapter(@NonNull FirebaseRecyclerOptions<Posts> options) {
         super(options);
 
     }
