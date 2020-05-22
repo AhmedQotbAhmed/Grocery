@@ -6,4 +6,19 @@
     android:layout_height="match_parent"
     tools:context=".HomeActivity">
 
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tabLayout_home"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/cardview_light_background"
+        tools:ignore="MissingConstraints">
+    </com.google.android.material.tabs.TabLayout>
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/viewPager_home"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

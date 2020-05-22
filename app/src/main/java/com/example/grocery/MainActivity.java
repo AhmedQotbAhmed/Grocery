@@ -51,10 +51,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         signIn_Content=findViewById(R.id.sign_in_content);
         loadingBar=new ProgressDialog(this);
         chBx_rememberMe=findViewById(R.id.chBx_RememberMe);
-        Paper.init(this);
 
         SignUp.setOnClickListener(this);
         frg_btn.setOnClickListener(this);
+
+        Paper.init(this);
+
+        String userEmailKey=Paper.book().read(Prevalent.userEmailKey);
+        String userPasswordKey=Paper.book().read(Prevalent.userPasswordKey);
+
+        if (userEmailKey!=null&&userPasswordKey!=null){
+            if(!userEmailKey.isEmpty()&&!userPasswordKey.isEmpty()){
+                AllowAccessToAccount( userEmailKey,userPasswordKey);
+
+            }
         // doubleClick is
         //"A android library lo handle double click on android Views components. You just need to call it on your view
         // in  https://github.com/pedromassango/doubleClick imp "
@@ -75,14 +85,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         })  );
 
-        String userEmailKey=Paper.book().read(Prevalent.userEmailKey);
-        String userPasswordKey=Paper.book().read(Prevalent.userPasswordKey);
 
-        if (userEmailKey!=null&&userPasswordKey!=null){
-            if(!userEmailKey.isEmpty()&&!userPasswordKey.isEmpty()){
-                AllowAccessToAccount( userEmailKey,userPasswordKey);
-
-            }
 
 
         }
@@ -99,29 +102,29 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         String email_Str = email_edt.getText().toString();
         String password_Str = password_edt.getText().toString();
 
-        boolean validation=true;
 
-        if (password_Str.length() < 8) {
-            password_edt.setError(" Minimum length of Password is should be 8 ");
-            password_edt.requestFocus();
-            validation=false;
+        if(email_edt!=null &&password_edt!=null) {
+
+            if (password_Str.length() < 8) {
+                password_edt.setError(" Minimum length of Password is should be 8 ");
+                password_edt.requestFocus();
+            }
+            else if (email_Str.isEmpty()) {
+                email_edt.setError("Email is required");
+                email_edt.requestFocus();
+
+            }
+
+            else
+
+                loadingBar.setTitle("Login Account");
+                loadingBar.setMessage("Please wait, while we are checking the credentials");
+                loadingBar.setCanceledOnTouchOutside(false);
+                loadingBar.show();
+                AllowAccessToAccount(email_Str, password_Str);
+
+
         }
-        if (email_Str.isEmpty()) {
-            email_edt.setError("Email is required");
-            email_edt.requestFocus();
-            validation=false;
-        }
-
-        if (validation){
-
-            loadingBar.setTitle("Login Account");
-            loadingBar.setMessage("Please wait, while we are checking the credentials");
-            loadingBar.setCanceledOnTouchOutside(false);
-            loadingBar.show();
-            AllowAccessToAccount(email_Str,password_Str);
-
-        }
-
     }
 
     private void AllowAccessToAccount(final String email_str, final String password_str) {
@@ -129,10 +132,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Paper.book().write(Prevalent.userEmailKey,email_str);
             Paper.book().write(Prevalent.userPasswordKey,password_str);
         }
-        final String email= (email_str.replace("@","-")).replace(".","_");
+
 
 
         rootRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            final String email= (email_str.replace("@","-")).replace(".","_");
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if(dataSnapshot.child("Users").child(email).exists()){
@@ -152,7 +156,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
                 }
-                else {
+                if (!dataSnapshot.child("Admin").child(email).exists()&&email.isEmpty()) {
                     loadingBar.dismiss();
                     email_edt.setError("Email do not exists");
                 }
