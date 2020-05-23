@@ -87,8 +87,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 }
 
-
-
             }
         })  );
 
@@ -146,11 +144,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     if(userData.getEmail().equals(email_str)){
                         if(userData.getPassword().equals(password_str)){
                             loadingBar.dismiss();
+                            Prevalent.currentOnlineUser =userData;
                             startActivity(new Intent(MainActivity.this,HomeActivity.class));
                         }
                         else {
                             loadingBar.dismiss();
-                            email_edt.setError("password is incorrect");
+                            password_edt.setError("password is incorrect");
                         }
 
                     }

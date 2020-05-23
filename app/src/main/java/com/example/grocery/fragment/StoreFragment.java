@@ -11,8 +11,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.grocery.R;
-import com.example.grocery.UI.main.StoreItemAdapter;
-import com.example.grocery.model.Posts;
+import com.example.grocery.UI.main.StoreAdapter;
+import com.example.grocery.model.Products;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -43,7 +43,8 @@ public class StoreFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_store, container, false);
         // Inflate the layout for this fragment
-//        "Fruit", "Vegetables",  "Other"
+        //   "Fruit", "Vegetables",  "Other"
+
         postReference_Fruit = FirebaseDatabase.getInstance().getReference().child("products").child( "Fruit");
         postReference_Vegetables = FirebaseDatabase.getInstance().getReference().child("products").child( "Vegetables");
         postReference_Other = FirebaseDatabase.getInstance().getReference().child("products").child( "Other");
@@ -57,32 +58,29 @@ public class StoreFragment extends Fragment {
         recyclerView_Other.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false));
 
 
-//                adaptor = new CartAdapter();
-//                recyclerView.setAdapter(adaptor);
 
-//                Inflate the layout for this fragment
         return view;
     }
 
     @Override
     public void onStart() {
         super.onStart();
-        FirebaseRecyclerOptions<Posts> options_Fruit = new FirebaseRecyclerOptions.Builder<Posts>()
-                .setQuery(postReference_Fruit, Posts.class).build();
-    FirebaseRecyclerOptions<Posts> options_Vegetables = new FirebaseRecyclerOptions.Builder<Posts>()
-                .setQuery(postReference_Vegetables, Posts.class).build();
-    FirebaseRecyclerOptions<Posts> options__Other = new FirebaseRecyclerOptions.Builder<Posts>()
-                .setQuery(postReference_Other, Posts.class).build();
+        FirebaseRecyclerOptions<Products> options_Fruit = new FirebaseRecyclerOptions.Builder<Products>()
+                .setQuery(postReference_Fruit, Products.class).build();
+    FirebaseRecyclerOptions<Products> options_Vegetables = new FirebaseRecyclerOptions.Builder<Products>()
+                .setQuery(postReference_Vegetables, Products.class).build();
+    FirebaseRecyclerOptions<Products> options__Other = new FirebaseRecyclerOptions.Builder<Products>()
+                .setQuery(postReference_Other, Products.class).build();
 
-        StoreItemAdapter adaptor_Fruit = new StoreItemAdapter(options_Fruit);
+        StoreAdapter adaptor_Fruit = new StoreAdapter(options_Fruit);
         recyclerView_Fruit.setAdapter(adaptor_Fruit);
         adaptor_Fruit.startListening();
 
-        StoreItemAdapter adaptor_Vegetables = new StoreItemAdapter(options_Vegetables);
+        StoreAdapter adaptor_Vegetables = new StoreAdapter(options_Vegetables);
         recyclerView_Vegetables.setAdapter(adaptor_Vegetables);
         adaptor_Vegetables.startListening();
 
-        StoreItemAdapter adaptor_Other = new StoreItemAdapter(options__Other);
+        StoreAdapter adaptor_Other = new StoreAdapter(options__Other);
         recyclerView_Other.setAdapter(adaptor_Other);
         adaptor_Other.startListening();
 

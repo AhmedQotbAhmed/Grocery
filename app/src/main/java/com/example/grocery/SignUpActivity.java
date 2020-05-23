@@ -112,7 +112,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
              }
 
         else {
-            Log.e("hello","hello");
+
             loadingBar.setTitle("Create Account");
             loadingBar.setMessage("Please wait, while we are checking the credentials");
             loadingBar.setCanceledOnTouchOutside(false);
@@ -130,7 +130,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     private void validationEmail(final String fname_str, final String lname_str, final String email_str, final String password_str, final String mobile_str) {
 
         final String email= (email_str.replace("@","-")).replace(".","_");
-        Log.e("validationEmail","hello");
+
         rootRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -149,12 +149,12 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                                     if (task.isSuccessful()){
                                         Toast.makeText(SignUpActivity.this, "Congratulations," +
                                                 "your account has been created", Toast.LENGTH_LONG).show();
-                                        Log.e("errrror","hello");
+
                                         startActivity(new Intent(SignUpActivity.this,MainActivity.class));
                                         loadingBar.dismiss();
                                     }
                                     else{
-                                        Log.e("else","else");
+
                                         Toast.makeText(SignUpActivity.this,"Network Error: please try again...",Toast.LENGTH_LONG).show();
                                         loadingBar.dismiss();
 
@@ -163,7 +163,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                             });
                 }
                 else {
-                    Log.e("already","already");
+
                     Toast.makeText(SignUpActivity.this,"this "+email_str+"already exists",Toast.LENGTH_LONG).show();
                     loadingBar.dismiss();
                     Toast.makeText(SignUpActivity.this,"Please try anther email",Toast.LENGTH_LONG).show();

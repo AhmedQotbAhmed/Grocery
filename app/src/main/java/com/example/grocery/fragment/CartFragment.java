@@ -2,25 +2,25 @@ package com.example.grocery.fragment;
 
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
 import com.example.grocery.R;
 import com.example.grocery.UI.main.CartAdapter;
+import com.example.grocery.UI.main.CartItem;
 
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class CartFragment extends Fragment {
-private RecyclerView recyclerView;
-private CartAdapter adaptor;
+        private RecyclerView recyclerView;
+        private CartAdapter adaptor;
     public CartFragment() {
         // Required empty public constructor
     }

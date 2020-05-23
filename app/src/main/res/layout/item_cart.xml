@@ -118,7 +118,7 @@
             android:layout_width="62dp"
             android:layout_height="18dp"
             android:layout_marginStart="8dp"
-            android:text="Quantity"
+            android:text="0.25 k"
             android:textColor="#5E000000"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"

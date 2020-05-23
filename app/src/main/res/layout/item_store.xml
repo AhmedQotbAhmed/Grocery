@@ -2,10 +2,11 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical" android:layout_width="164dp"
-    android:layout_height="191sp"
+    android:orientation="vertical" android:layout_width="174dp"
+    android:layout_height="201sp"
     android:background="#fff"
     android:padding="10dp"
+    android:id="@+id/linearLayout_cart"
     android:layout_marginLeft="10dp"
     android:weightSum="3">
 
