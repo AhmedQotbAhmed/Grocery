@@ -51,7 +51,7 @@ public class StoreAdapter extends FirebaseRecyclerAdapter<Products, StoreAdapter
     }
 
     @Override
-    protected void onBindViewHolder(@NonNull ItemViewHolder holder, int position, @NonNull final Products model) {
+    protected void onBindViewHolder(@NonNull final ItemViewHolder holder, int position, @NonNull final Products model) {
        String name= model.getName_str();
 
 //        Log.e("name",name);
@@ -60,11 +60,18 @@ public class StoreAdapter extends FirebaseRecyclerAdapter<Products, StoreAdapter
         holder.product_price.setText(model.getPrice_str() + " LE");
 
         Picasso.get().load(model.getUri()).into(holder.product_Image);
+        holder.product_favourite_it.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                holder.product_favourite_it.setImageResource(R.drawable.ic_favorite);
+                Add_to_favourite_PostData( model);
+            }
+        });
 
         holder.linearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Upload_all_PostData(model);
+                Add_to_cart_PostData(model);
             }
         });
 
@@ -73,12 +80,14 @@ public class StoreAdapter extends FirebaseRecyclerAdapter<Products, StoreAdapter
 
     class ItemViewHolder extends RecyclerView.ViewHolder {
         ImageView product_Image;
+        ImageView product_favourite_it;
         TextView product_name;
         TextView product_price;
         LinearLayout linearLayout;
 
         ItemViewHolder(@NonNull View itemView) {
             super(itemView);
+            product_favourite_it=itemView.findViewById(R.id.product_favourite_it);
             linearLayout=itemView.findViewById(R.id.linearLayout_cart);
             product_Image = itemView.findViewById(R.id.product_image_it);
             product_name = itemView.findViewById(R.id.product_name_it);
@@ -89,7 +98,7 @@ public class StoreAdapter extends FirebaseRecyclerAdapter<Products, StoreAdapter
 
 
 
-    private void Upload_all_PostData(Products product) {
+    private void Add_to_cart_PostData(Products product) {
 
 
 //      product    ,   price_str ,  itemCategory and uri this is our post data
@@ -103,6 +112,30 @@ public class StoreAdapter extends FirebaseRecyclerAdapter<Products, StoreAdapter
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()) {
                             Toast.makeText(context, "Add to Cart", Toast.LENGTH_LONG).show();
+
+
+                        } else {
+                            Toast.makeText(context, "Network Error: please try again...", Toast.LENGTH_LONG).show();
+
+
+                        }
+                    }
+                });
+
+    } private void Add_to_favourite_PostData(Products product) {
+
+
+//      product    ,   price_str ,  itemCategory and uri this is our post data
+        final String email= Prevalent.userEmail;
+        Log.e("email",email+"");
+
+        reference.child("Users").child(email).child("favourite").child(product.getName_str())
+                .setValue(product)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            Toast.makeText(context, "Add to favourite", Toast.LENGTH_LONG).show();
 
 
                         } else {

@@ -27,8 +27,8 @@ import com.google.firebase.database.FirebaseDatabase;
  */
 public class CartFragment extends Fragment {
         private RecyclerView recyclerView;
-        private CartAdapter adaptor;
-    private DatabaseReference postReference;
+
+        private DatabaseReference postReference;
     public CartFragment() {
         // Required empty public constructor
     }
@@ -39,7 +39,7 @@ public class CartFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view=  inflater.inflate(R.layout.fragment_cart, container, false);
         final String email= Prevalent.userEmail;
-        Log.e("cart",email);
+
         postReference = FirebaseDatabase.getInstance().getReference().child("Users").child(email).child( "Cart");
         // Inflate the layout for this fragment
         recyclerView=view.findViewById(R.id.recycler_cart);
