@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -35,6 +36,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private EditText password_edt;
     private ProgressDialog loadingBar;
     private CheckBox chBx_rememberMe;
+    private SharedPreferences sp;
+    private SharedPreferences.Editor Ed;
     private  DatabaseReference rootRef= FirebaseDatabase.getInstance().getReference();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +45,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
 
         FirebaseApp.initializeApp(this);
-
+        sp=getSharedPreferences("userLogin", MODE_PRIVATE);
+        Ed=sp.edit();
         email_edt=findViewById(R.id.email_signIn);
         password_edt=findViewById(R.id.pass_signIn);
         Button signIn = findViewById(R.id.sign_in_btn);
@@ -53,16 +57,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         chBx_rememberMe=findViewById(R.id.chBx_RememberMe);
 
 
-        Paper.init(this);
+        SharedPreferences sp1=this.getSharedPreferences("userLogin", MODE_PRIVATE);
 
-        String userEmailKey=Paper.book().read(Prevalent.userEmailKey);
-        String userPasswordKey=Paper.book().read(Prevalent.userPasswordKey);
+        String unm=sp1.getString("Unm", null);
+        String pass = sp1.getString("Psw", null);
 
-        if (userEmailKey!=null&&userPasswordKey!=null){
-            if(!userEmailKey.isEmpty()&&!userPasswordKey.isEmpty()){
-                AllowAccessToAccount( userEmailKey,userPasswordKey);
+        if (unm!=null&&pass!=null){
+            if(!unm.isEmpty()&&!pass.isEmpty()){
+                loadingBar.setTitle("Login Account");
+                loadingBar.setMessage("Please wait, while we are checking the credentials");
+                loadingBar.setCanceledOnTouchOutside(false);
+                loadingBar.show();
+                AllowAccessToAccount( unm,pass);
 
-            }}
+            }
+        }
         // doubleClick is
         //"A android library lo handle double click on android Views components. You just need to call it on your view
         // in  https://github.com/pedromassango/doubleClick imp "
@@ -131,9 +140,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void AllowAccessToAccount(final String email_str, final String password_str) {
         if (chBx_rememberMe.isChecked()){
-            Paper.book().write(Prevalent.userEmailKey,email_str);
-            Paper.book().write(Prevalent.userPasswordKey,password_str);
-        }
+            loadingBar.setTitle("Login Account");
+            loadingBar.setMessage("Please wait, while we are checking the credentials");
+            loadingBar.setCanceledOnTouchOutside(false);
+            loadingBar.show();
+            Ed.putString("Unm",email_str );
+            Ed.putString("Psw",password_str);
+            Ed.commit();}
 
 
 
@@ -141,8 +154,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             final String email= (email_str.replace("@","-")).replace(".","_");
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if(dataSnapshot.child("Users").child(email).exists()){
-                    User userData= dataSnapshot.child("Users").child(email).getValue(User.class);
+                if(dataSnapshot.child("Users").child(email).child("profile_inf").exists()){
+                    User userData= dataSnapshot.child("Users").child(email).child("profile_inf").getValue(User.class);
                     if(userData.getEmail().equals(email_str)){
                         if(userData.getPassword().equals(password_str)){
                             loadingBar.dismiss();
@@ -160,7 +173,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
                 }
-                if (!dataSnapshot.child("Admin").child(email).exists()&&email.isEmpty()) {
+                else if (email_edt.getText().toString().isEmpty()){
+                    loadingBar.dismiss();
+
+                }
+                else {
                     loadingBar.dismiss();
                     email_edt.setError("Email do not exists");
                 }

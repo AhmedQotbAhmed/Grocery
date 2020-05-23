@@ -4,6 +4,7 @@ package com.example.grocery.fragment;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -43,8 +44,8 @@ public class FavouriteFragment extends Fragment {
         postReference = FirebaseDatabase.getInstance().getReference().child("Users").child(email).child( "favourite");
         // Inflate the layout for this fragment
         recyclerView=view.findViewById(R.id.recycler_Favourite);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-
+        RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(getContext(), 2);
+        recyclerView.setLayoutManager(mLayoutManager);
 
         return view;
 

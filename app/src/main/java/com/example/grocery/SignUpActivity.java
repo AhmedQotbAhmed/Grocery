@@ -134,7 +134,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         rootRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if(!dataSnapshot.child("Users").child(email).exists()){
+                if(!dataSnapshot.child("Users").child(email).child("profile_inf").exists()){
                     User user=new User();
                     user.setFname(fname_str);
                     user.setLname(lname_str);
@@ -142,7 +142,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                     user.setPassword(password_str);
                     user.setMobile(mobile_str);
 
-                    rootRef.child("Users").child(email).setValue(user)
+                    rootRef.child("Users").child(email).child("profile_inf").setValue(user)
                             .addOnCompleteListener(new OnCompleteListener<Void>(){
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {

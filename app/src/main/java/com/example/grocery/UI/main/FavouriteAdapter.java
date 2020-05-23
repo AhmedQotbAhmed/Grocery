@@ -42,6 +42,7 @@ public class FavouriteAdapter extends FirebaseRecyclerAdapter<Products, Favourit
      */
     public FavouriteAdapter(@NonNull FirebaseRecyclerOptions<Products> options) {
         super(options);
+
     }
 
 
@@ -71,7 +72,7 @@ public class FavouriteAdapter extends FirebaseRecyclerAdapter<Products, Favourit
 
 
 
-        final double price = Double.valueOf(holder.product_price.getText().toString().replace(" LE", ""));
+
 
         holder.product_favourite_fa.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -113,7 +114,7 @@ public class FavouriteAdapter extends FirebaseRecyclerAdapter<Products, Favourit
 //      product    ,   price_str ,  itemCategory and uri this is our post data
         final String email = Prevalent.userEmail;
         Log.e("email", email + "");
-
+        reference = FirebaseDatabase.getInstance().getReference();
         reference.child("Users").child(email).child("Cart").child(product.getName_str())
                 .setValue(product)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
