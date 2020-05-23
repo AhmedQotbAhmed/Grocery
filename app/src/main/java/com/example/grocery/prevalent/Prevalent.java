@@ -7,11 +7,8 @@ public class Prevalent {
 
 
     public static final String userEmailKey="userEmail";
+    public  static String userEmail;
     public static final  String userPasswordKey="userEmail";
-
-
-
-
 
 
 

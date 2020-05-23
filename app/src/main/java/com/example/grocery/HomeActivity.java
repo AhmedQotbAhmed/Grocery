@@ -9,7 +9,7 @@ import com.example.grocery.R;
 import com.example.grocery.UI.main.FragmentAdapter;
 import com.google.android.material.tabs.TabLayout;
 
-public class HomeActivity extends AppCompatActivity {
+public class HomeActivity extends AppCompatActivity  {
     private TabLayout tabLayout;
     private ViewPager viewPager;
 
@@ -52,7 +52,8 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
-
-
     }
+
+
+
 }

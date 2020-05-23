@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import com.example.grocery.model.User;
 import com.example.grocery.prevalent.Prevalent;
+import com.google.firebase.FirebaseApp;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -34,11 +35,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private EditText password_edt;
     private ProgressDialog loadingBar;
     private CheckBox chBx_rememberMe;
-    private final DatabaseReference rootRef= FirebaseDatabase.getInstance().getReference();
+    private  DatabaseReference rootRef= FirebaseDatabase.getInstance().getReference();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        FirebaseApp.initializeApp(this);
 
         email_edt=findViewById(R.id.email_signIn);
         password_edt=findViewById(R.id.pass_signIn);
@@ -49,8 +52,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         loadingBar=new ProgressDialog(this);
         chBx_rememberMe=findViewById(R.id.chBx_RememberMe);
 
-        signUp.setOnClickListener(this);
-        frg_btn.setOnClickListener(this);
 
         Paper.init(this);
 
@@ -65,6 +66,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         // doubleClick is
         //"A android library lo handle double click on android Views components. You just need to call it on your view
         // in  https://github.com/pedromassango/doubleClick imp "
+        signUp.setOnClickListener(this);
+        frg_btn.setOnClickListener(this);
 
         signIn.setOnClickListener( new DoubleClick(new DoubleClickListener() {
             @Override
@@ -115,15 +118,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             }
 
-            else
+            else{
 
                 loadingBar.setTitle("Login Account");
                 loadingBar.setMessage("Please wait, while we are checking the credentials");
                 loadingBar.setCanceledOnTouchOutside(false);
                 loadingBar.show();
                 AllowAccessToAccount(email_Str, password_Str);
-
-
+            }
         }
     }
 
@@ -145,6 +147,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         if(userData.getPassword().equals(password_str)){
                             loadingBar.dismiss();
                             Prevalent.currentOnlineUser =userData;
+                            Prevalent.userEmail=email;
                             startActivity(new Intent(MainActivity.this,HomeActivity.class));
                         }
                         else {

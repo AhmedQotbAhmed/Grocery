@@ -2,7 +2,7 @@ package com.example.grocery.UI.main;
 
 import com.example.grocery.model.Products;
 
-import java.util.Arrays;
+
 import java.util.List;
 
 public class CartItem {
@@ -17,25 +17,26 @@ public class CartItem {
 
 
     public  String pluseOprition(String quantity_str) {
-        quantity = Double.valueOf(quantity_str.replace(" k", "")) / 1000.0;
+        quantity = Double.valueOf(quantity_str.replace(" k", ""));
         quantity += 0.25;
         totalPrice=price*quantity;
         return quantity + " k";
     }
 
     public String minusOprition(String quantity_str) {
-        if (Integer.valueOf(quantity_str.replace("K", "")) / 1000 > 0.25) {
-            quantity = Integer.valueOf(quantity_str.replace(" k", "")) / 1000.0;
+        if (Double.valueOf(quantity_str.replace(" k", ""))  > 0.25) {
+            quantity = Double.valueOf(quantity_str.replace(" k", "")) ;
             quantity -= 0.25;
             totalPrice=price*quantity;
             return quantity + " k";
-        } else {
+        }
+        else {
             return quantity_str;
         }
     }
 
     public String getTotalPrice() {
-        return totalPrice+"LE";
+        return totalPrice+" LE";
     }
 
     public void setTotlePrice(int totalPrice) {

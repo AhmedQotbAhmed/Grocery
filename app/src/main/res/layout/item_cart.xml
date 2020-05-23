@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginTop="10dp"
     android:background="@drawable/border"
     android:orientation="horizontal"
     android:padding="10dp"
@@ -14,6 +15,7 @@
         android:layout_width="0dp"
         android:layout_height="185dp"
         android:layout_weight="0.8"
+        android:background="#fff"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -52,11 +54,29 @@
         android:layout_width="0dp"
         android:layout_height="177dp"
         android:layout_weight="1.2"
+        android:background="#fff"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/linearLayout_it_c"
         app:layout_constraintTop_toTopOf="parent">
+
+
+        <TextView
+            android:textAlignment="center"
+            android:id="@+id/delete_cart"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="8dp"
+            android:text="X"
+            android:textColor="#000000"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.709"
+            app:layout_constraintStart_toEndOf="@+id/total_price_it_c"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/total_price_it_c"
@@ -88,15 +108,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end|bottom"
-            android:layout_marginEnd="17dp"
+            android:layout_marginEnd="8dp"
             android:layout_marginBottom="16dp"
             android:background="@android:color/white"
             android:padding="5dp"
             android:src="@drawable/ic_plus"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toEndOf="@+id/quantity_it_c"
             tools:ignore="MissingConstraints" />
 
         <ImageView
@@ -117,14 +135,16 @@
             android:id="@+id/quantity_it_c"
             android:layout_width="62dp"
             android:layout_height="18dp"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
             android:text="0.25 k"
+            android:textAlignment="center"
             android:textColor="#5E000000"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/plus_btn_it_c"
             app:layout_constraintStart_toEndOf="@+id/minus_btn_it_c"
             app:layout_constraintTop_toBottomOf="@+id/name_it_c"
-            app:layout_constraintVertical_bias="0.561" />
+            app:layout_constraintVertical_bias="0.635" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </LinearLayout>
