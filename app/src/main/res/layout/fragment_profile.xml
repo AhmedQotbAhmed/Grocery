@@ -22,7 +22,7 @@
             android:id="@+id/profile_image"
             android:layout_width="101dp"
             android:layout_height="112dp"
-            android:src="@drawable/defaulte_profile_image"
+            android:src="@drawable/defaulter_profile_image"
             app:civ_border_color="#FFFFFF"
             app:civ_border_width="2dp"
             app:layout_constraintStart_toStartOf="parent"
@@ -71,9 +71,130 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"/>
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="5dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/recipients_prof"
+            android:layout_width="match_parent"
+            android:layout_height="68dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="5dp"
+            android:background="#fff"
+            android:drawableStart="@drawable/ic_recipients_prof_icon"
+            android:drawableEnd="@drawable/ic_details_icon"
+            android:paddingLeft="10dp"
+            android:paddingTop="22dp"
+            android:paddingRight="10dp"
+            android:paddingBottom="25dp"
+            android:text="    Recipients details"
+            android:textColor="#C6000000"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@tools:sample/avatars[1]" />
+
+        <TextView
+            android:id="@+id/delivery_address_prof"
+            android:layout_width="match_parent"
+            android:layout_height="68dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="5dp"
+            android:background="#fff"
+            android:drawableStart="@drawable/ic_delivery_address"
+            android:drawableEnd="@drawable/ic_details_icon"
+            android:paddingLeft="10dp"
+            android:paddingTop="22dp"
+            android:paddingRight="10dp"
+            android:paddingBottom="25dp"
+            android:text="    Delivery address"
+            android:textColor="#C6000000"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/recipients_prof"
+            tools:src="@tools:sample/avatars" />
+
+        <TextView
+            android:id="@+id/payment_method_prof"
+            android:layout_width="match_parent"
+            android:layout_height="68dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="5dp"
+            android:background="#fff"
+            android:drawableStart="@drawable/ic_pyment_icon"
+            android:drawableEnd="@drawable/ic_details_icon"
+            android:paddingLeft="10dp"
+            android:paddingTop="22dp"
+            android:paddingRight="10dp"
+            android:paddingBottom="25dp"
+            android:text="    Payment Method"
+            android:textColor="#C6000000"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/delivery_address_prof"
+            tools:src="@tools:sample/avatars[2]" />
+
+        <TextView
+            android:id="@+id/change_password_prof"
+            android:layout_width="match_parent"
+            android:layout_height="68dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="5dp"
+            android:background="#fff"
+            android:drawableStart="@drawable/ic_r_password_icon"
+            android:drawableEnd="@drawable/ic_details_icon"
+            android:paddingLeft="10dp"
+            android:paddingTop="22dp"
+            android:paddingRight="10dp"
+            android:paddingBottom="25dp"
+            android:text="    Change Password"
+            android:textColor="#C6000000"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/payment_method_prof"
+            tools:src="@tools:sample/avatars[10]" />
+
+        <TextView
+            android:id="@+id/logout_prof"
+            android:layout_width="match_parent"
+            android:layout_height="68dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="5dp"
+            android:background="#fff"
+            android:drawableStart="@drawable/ic_logout_icon"
+            android:paddingLeft="10dp"
+            android:paddingTop="22dp"
+            android:paddingRight="10dp"
+            android:paddingBottom="25dp"
+            android:text="    Logout"
+            android:textColor="#C6000000"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/change_password_prof"
+            tools:src="@tools:sample/avatars[3]" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 </LinearLayout>

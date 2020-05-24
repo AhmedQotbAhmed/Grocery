@@ -4,11 +4,14 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
 import android.widget.CheckBox;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.grocery.R;
@@ -25,6 +28,7 @@ import com.squareup.picasso.Picasso;
 
 public class CartAdapter extends FirebaseRecyclerAdapter<Products, CartAdapter.ItemHolder> {
     private  Context context;
+
 
     private DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
 
@@ -47,6 +51,7 @@ public class CartAdapter extends FirebaseRecyclerAdapter<Products, CartAdapter.I
     @NonNull
     @Override
     public ItemHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+
         context=parent.getContext();
        View view = LayoutInflater.from(parent.getContext())
                .inflate(R.layout.item_cart, parent, false);
@@ -68,6 +73,7 @@ public class CartAdapter extends FirebaseRecyclerAdapter<Products, CartAdapter.I
         holder.total_price.setText(Double.valueOf(holder.price_Txv.getText().toString()
                 .replace(" LE", "")) * 0.25 + " LE");
 
+        holder.linearLayout.setAnimation(AnimationUtils.loadAnimation(context, R.anim.content_transition_animation));
 
         final double price = Double.valueOf(holder.price_Txv.getText().toString().replace(" LE", ""));
 
@@ -86,6 +92,7 @@ public class CartAdapter extends FirebaseRecyclerAdapter<Products, CartAdapter.I
                 quan = cartItem.pluseOprition(holder.quantity_txv.getText().toString());
                 holder.quantity_txv.setText(quan);
                 holder.total_price.setText(cartItem.getTotalPrice());
+
 
 
             }
@@ -120,7 +127,7 @@ public class CartAdapter extends FirebaseRecyclerAdapter<Products, CartAdapter.I
     public class ItemHolder extends RecyclerView.ViewHolder {
 
 //        ConstraintLayout constraintLayout;
-//        LinearLayout linearLayout;
+        LinearLayout linearLayout;
         TextView price_Txv;
         ImageView product_img;
         TextView total_price;
@@ -132,7 +139,7 @@ public class CartAdapter extends FirebaseRecyclerAdapter<Products, CartAdapter.I
         public ItemHolder(@NonNull View itemView) {
             super(itemView);
 //    constraintLayout=itemView.findViewById(R.id.con_lay_it_c);
-//    linearLayout=itemView.findViewById(R.id.linearLayout_it_c);
+    linearLayout=itemView.findViewById(R.id.linearLayout_it);
     chBx_Delete = itemView.findViewById(R.id.delete_cart);
     price_Txv=itemView.findViewById(R.id.price_it_c);
     product_img=itemView.findViewById(R.id.product_image_it_c);

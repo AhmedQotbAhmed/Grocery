@@ -111,7 +111,7 @@ public class StoreAdapter extends FirebaseRecyclerAdapter<Products, StoreAdapter
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()) {
-                            Toast.makeText(context, "Add to Cart", Toast.LENGTH_LONG).show();
+                            Toast.makeText(context, "Add to Cart", Toast.LENGTH_SHORT).show();
 
 
                         } else {
@@ -135,7 +135,7 @@ public class StoreAdapter extends FirebaseRecyclerAdapter<Products, StoreAdapter
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()) {
-                            Toast.makeText(context, "Add to favourite", Toast.LENGTH_LONG).show();
+                            Toast.makeText(context, "Add to favourite", Toast.LENGTH_SHORT).show();
 
 
                         } else {
