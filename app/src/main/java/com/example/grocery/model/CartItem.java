@@ -1,4 +1,6 @@
-package com.example.grocery.UI.main;
+package com.example.grocery.model;
+
+import android.util.Log;
 
 import com.example.grocery.model.Products;
 
@@ -26,17 +28,27 @@ public class CartItem {
     public String minusOprition(String quantity_str) {
         if (Double.valueOf(quantity_str.replace(" k", ""))  > 0.25) {
             quantity = Double.valueOf(quantity_str.replace(" k", "")) ;
+            Log.e("price",quantity+"");
+
             quantity -= 0.25;
             totalPrice=price*quantity;
             return quantity + " k";
         }
         else {
-            return quantity_str;
+            quantity = Double.valueOf(quantity_str.replace(" k", "")) ;
+            quantity = 0.25;
+            totalPrice=price*quantity;
+            return quantity + " k";
         }
     }
 
     public String getTotalPrice() {
+
         return totalPrice+" LE";
+    }
+
+    public double get_Total_Price() {
+        return totalPrice;
     }
 
     public void setTotlePrice(int totalPrice) {

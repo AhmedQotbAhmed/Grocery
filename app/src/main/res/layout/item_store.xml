@@ -2,21 +2,24 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical" android:layout_width="174dp"
-    android:layout_height="221dp"
+    android:orientation="vertical" android:layout_width="164dp"
+    android:layout_height="201dp"
     android:background="#fff"
-    android:padding="10dp"
+    android:paddingHorizontal="5dp"
     android:id="@+id/linearLayout_cart"
-    android:layout_marginLeft="10dp"
+    android:layout_marginLeft="5dp"
     android:weightSum="3">
 
     <ImageView
+
         android:id="@+id/product_favourite_it"
-        android:layout_width="wrap_content"
+        android:layout_width="31dp"
         android:layout_height="22dp"
-        android:layout_gravity="right|top"
-
-
+        android:layout_gravity="right"
+        android:cropToPadding="false"
+        android:foregroundGravity="right"
+        android:paddingLeft="10dp"
+        android:scrollbarAlwaysDrawHorizontalTrack="false"
         android:src="@drawable/ic_not__favorite" />
 
     <ImageView
@@ -24,7 +27,7 @@
         android:layout_width="138dp"
         android:layout_height="5dp"
         android:layout_gravity="left"
-        android:layout_weight="2.4"
+        android:layout_weight="2.2"
         android:maxWidth="43dp"
         android:maxHeight="34dp"
         android:scaleType="fitXY"
@@ -35,7 +38,7 @@
 
     <TextView
         android:layout_marginTop="5dp"
-        android:layout_weight="0.3"
+        android:layout_weight="0.4"
         android:id="@+id/product_name_it"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
@@ -47,7 +50,7 @@
 
     <TextView
         android:layout_marginTop="5dp"
-        android:layout_weight="0.3"
+        android:layout_weight="0.4"
         android:id="@+id/product_price_it"
         android:layout_width="wrap_content"
         android:layout_height="0dp"

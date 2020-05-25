@@ -8,13 +8,14 @@
     app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
     app:behavior_hideable="true"
     app:behavior_peekHeight="70dp"
+    android:paddingHorizontal="10dp"
     android:background="#E8FFFFFF"
     android:id="@+id/cart_summary"
     >
 
     <LinearLayout
         android:id="@+id/linearLayout"
-        android:layout_width="392dp"
+        android:layout_width="372dp"
         android:layout_height="83dp"
         android:paddingLeft="3dp"
         android:paddingBottom="5dp"
@@ -65,24 +66,25 @@
         android:textColor="#000000"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf="@+id/total_price_p3"
+        app:layout_constraintEnd_toStartOf="@+id/total_price_payment_p"
         app:layout_constraintHorizontal_bias="0.02"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/add_coupon" />
 
     <TextView
-        android:id="@+id/total_price_p3"
+        android:id="@+id/total_price_payment_p"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
         android:layout_weight="2.5"
         android:padding="5dp"
-        android:text="EL, 1,820.00"
+        android:text="EL, 0.0"
         android:textColor="#000000"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/coupon_p"
         app:layout_constraintTop_toBottomOf="@+id/coupon_p" />
 
     <TextView
@@ -103,15 +105,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginEnd="16dp"
         android:layout_weight="2.5"
         android:background="@drawable/dash_line"
-        android:padding="5dp"
         android:hint="ADD COUPON"
+        android:padding="5dp"
         android:textColorHint="#2ac17e"
         android:textSize="12sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/delivery_cost_p"
         app:layout_constraintTop_toBottomOf="@+id/delivery_cost_p" />
 
     <TextView
@@ -122,52 +126,54 @@
         android:layout_weight="2.5"
         android:padding="5dp"
         android:text="Subtotal (0 item)"
-        app:layout_constraintEnd_toStartOf="@+id/total_price_p"
+        app:layout_constraintEnd_toStartOf="@+id/subtotal_price_p"
         app:layout_constraintHorizontal_bias="0.08"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
     <TextView
-        android:id="@+id/total_price_p"
+        android:id="@+id/subtotal_price_p"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginEnd="32dp"
         android:layout_weight="2.5"
         android:padding="5dp"
-        android:text="EL, 1,820.00"
+        android:text="EL, 0.0"
         android:textColor="#000000"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
     <TextView
-        android:id="@+id/prmoition_discount"
+        android:id="@+id/promotion_discount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:layout_weight="2.5"
         android:padding="5dp"
-        android:text="Pmoition discount"
-        app:layout_constraintEnd_toStartOf="@+id/dicount_p"
+        android:text="Promotion discount"
+        app:layout_constraintEnd_toStartOf="@+id/discount_p"
         app:layout_constraintHorizontal_bias="0.071"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/subtotal_item" />
 
     <TextView
-        android:id="@+id/dicount_p"
+        android:id="@+id/discount_p"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="12dp"
+        android:layout_marginEnd="16dp"
         android:layout_weight="2.5"
         android:padding="5dp"
-        android:text="EL, -220.00"
+        android:text="EL, -10.00"
         android:textColor="@color/common_google_signin_btn_text_light_focused"
         android:textSize="14sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/total_price_p" />
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/subtotal_price_p"
+        app:layout_constraintTop_toBottomOf="@+id/subtotal_price_p" />
 
     <TextView
         android:id="@+id/delivery_cost_p"
@@ -177,11 +183,13 @@
         android:layout_marginEnd="16dp"
         android:layout_weight="2.5"
         android:padding="5dp"
-        android:text="EL, 250.00"
+        android:text="EL, 30.00"
         android:textColor="@color/common_google_signin_btn_text_light_focused"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dicount_p" />
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/discount_p"
+        app:layout_constraintTop_toBottomOf="@+id/discount_p" />
 
     <TextView
         android:id="@+id/delivery_cost"
@@ -194,7 +202,7 @@
         app:layout_constraintEnd_toStartOf="@+id/delivery_cost_p"
         app:layout_constraintHorizontal_bias="0.11"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/prmoition_discount" />
+        app:layout_constraintTop_toBottomOf="@+id/promotion_discount" />
 
 
     <Button
@@ -210,11 +218,11 @@
         android:text="CANCEL"
         android:textColor="@color/colorAccent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/button2"
-        app:layout_constraintTop_toBottomOf="@+id/total_price_p3" />
+        app:layout_constraintEnd_toStartOf="@+id/paynow_btn"
+        app:layout_constraintTop_toBottomOf="@+id/total_price_payment_p" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/paynow_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
@@ -227,7 +235,7 @@
         android:textColor="#fff"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/total_price_p3" />
+        app:layout_constraintTop_toBottomOf="@+id/total_price_payment_p" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
