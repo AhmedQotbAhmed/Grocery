@@ -49,6 +49,7 @@ public class CartFragment extends Fragment {
     private TextView totalprice ;
     private TextView totalprice_payment ;
     private Button paynow;
+    private Button cancel;
 
 
         private DatabaseReference postReference;
@@ -81,6 +82,7 @@ public class CartFragment extends Fragment {
         bottomSheetBehavior= BottomSheetBehavior.from(cart_summary);
 
         paynow=view.findViewById(R.id.paynow_btn);
+        cancel=view.findViewById(R.id.cancel_btn);
         bottomSheetBehavior.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
             @Override
             public void onStateChanged(@NonNull View bottomSheet, int newState) {
@@ -101,16 +103,32 @@ public class CartFragment extends Fragment {
         itemCount =view.findViewById(R.id.subtotal_item);
         totalprice =view.findViewById(R.id.subtotal_price_p);
         totalprice_payment =view.findViewById(R.id.total_price_payment_p);
+
         paynow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                upload_Invoices ();
+                if (!totalprice_payment.getText().toString().equals("EL, " + 0.0))
+                {  upload_Invoices ();
 
-                startActivity(new Intent(getContext(), CheckoutActivity.class));
+                startActivity(new Intent(getContext(), CheckoutActivity.class));}
             }
         });
 
 
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                list.clear();
+                final String email= Prevalent.userEmail;
+                reference.child("Users").child(email).child("invoices").child(((int)total_price)+"-"+size+"-"+((int)(total_price - 10 + 30))).removeValue();
+                reference.child("Users").child(email).child( "Cart").removeValue();
+
+                itemCount.setText("Subtotal (" + 0 + " item)");
+                totalprice.setText("EL, " + 0.0);
+                totalprice_payment.setText("EL, " + 0.0);
+
+            }
+        });
     }
 
     @SuppressLint("SetTextI18n")
@@ -126,19 +144,9 @@ public class CartFragment extends Fragment {
 
             }
 
-
-
-
-
             itemCount.setText("Subtotal (" + size + " item)");
             totalprice.setText("EL, " + total_price);
             totalprice_payment.setText("EL, " + (total_price - 10 + 30));
-
-
-
-
-//      product    ,   price_str ,  itemCategory and uri this is our post data
-
 
         }
     }
