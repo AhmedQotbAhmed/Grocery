@@ -27,17 +27,14 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
 
 
 public class CartAdapter extends FirebaseRecyclerAdapter<Products, CartAdapter.ItemHolder> {
     private  Context context;
 
 @SuppressLint("UseSparseArrays")
-HashMap<String,Double> ptotal_price=new HashMap<>();
+HashMap<String,Products> total_price =new HashMap<>();
 
     private DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
 
@@ -56,8 +53,6 @@ HashMap<String,Double> ptotal_price=new HashMap<>();
     }
 
 
-
-
     @NonNull
     @Override
     public ItemHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -71,6 +66,7 @@ HashMap<String,Double> ptotal_price=new HashMap<>();
     }
 
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onBindViewHolder(@NonNull final ItemHolder holder, final int position, @NonNull final Products model) {
 
@@ -82,64 +78,74 @@ HashMap<String,Double> ptotal_price=new HashMap<>();
         Picasso.get().load(model.getUri()).into(holder.product_img);
         holder.product_name.setText(model.getName_str());
 
+        holder.quantity_txv.setText(model.getQuantity()+ " k");
+        holder.total_price.setText(model.getTotal_price()+" LE");
+
+
 
 //        holder.quantity_txv.setText(quan);
         holder.linearLayout.setAnimation(AnimationUtils.loadAnimation(context, R.anim.content_transition_animation));
 
-        final double price = Double.valueOf(holder.price_Txv.getText().toString().replace(" LE", ""));
+        final double price = Double.valueOf(model.getPrice_str());
 
         holder.chBx_Delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               if (ptotal_price.containsKey(holder.product_name.getText().toString())){
-                ptotal_price.remove(holder.product_name.getText().toString());}
+
+                total_price.remove(holder.product_name.getText().toString());
                 delete_data( model.getName_str());
+
 
             }
         });
 
         holder.plus_btn.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("SetTextI18n")
             @Override
             public void onClick(View v) {
                 String quan;
                 cartItem.setPrice(price);
 
-//                    ptotal_price.add(cartItem.get_Total_Price());
+
                     quan = cartItem.pluseOprition(holder.quantity_txv.getText().toString());
-                    holder.quantity_txv.setText(quan);
-                    holder.total_price.setText(cartItem.getTotalPrice());
+                    holder.quantity_txv.setText(quan+ " k");
+                    holder.total_price.setText(cartItem.getTotalPrice()+" LE");
 
-                    ptotal_price.put(holder.product_name.getText().toString(), cartItem.get_Total_Price());
+                    model.setQuantity(quan );
+                    model.setTotal_price(cartItem.getTotalPrice());
 
+                    total_price.put(holder.product_name.getText().toString(), model);
+                    Add_to_cart_PostData(model);
 
 
 
             }
         });
         holder.minus_btn.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("SetTextI18n")
             @Override
             public void onClick(View v) {
                 String quan;
                 cartItem.setPrice(price);
 
-//                    ptotal_price.add(cartItem.get_Total_Price());
+
                     quan = cartItem.minusOprition(holder.quantity_txv.getText().toString());
-                    holder.quantity_txv.setText(quan);
-                    holder.total_price.setText(cartItem.getTotalPrice());
+                    holder.quantity_txv.setText(quan+ " k");
+                    holder.total_price.setText(cartItem.getTotalPrice()+" LE");
 
-                    ptotal_price.put(holder.product_name.getText().toString(),cartItem.get_Total_Price());
+                    model.setTotal_price(cartItem.getTotalPrice()+" LE");
+                    model.setQuantity(quan);
 
-
-
-
-
-
+                    total_price.put(holder.product_name.getText().toString(), model);
+                    Add_to_cart_PostData(model);
 
             }
         });
 
 
     }
+
+
 
 
 
@@ -153,11 +159,33 @@ HashMap<String,Double> ptotal_price=new HashMap<>();
     }
 
 
-    public HashMap<String, Double> getPtotal_price() {
-        return ptotal_price;
+    public HashMap<String, Products> getTotal_price() {
+        return total_price;
     }
 
 
+
+    private void Add_to_cart_PostData(Products product) {
+
+
+//      product    ,   price_str ,  itemCategory and uri this is our post data
+        final String email= Prevalent.userEmail;
+        Log.e("email",email+"");
+
+        reference.child("Users").child(email).child("Cart").child(product.getName_str())
+                .setValue(product)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+
+                        } else {
+                            Toast.makeText(context, "Network Error: please try again...", Toast.LENGTH_LONG).show();
+
+
+                        }
+                    }
+                });}
 
     public class ItemHolder extends RecyclerView.ViewHolder {
 

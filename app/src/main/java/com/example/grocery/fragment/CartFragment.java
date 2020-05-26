@@ -38,7 +38,7 @@ import java.util.HashMap;
  * A simple {@link Fragment} subclass.
  */
 public class CartFragment extends Fragment {
-    HashMap<String,Double> list;
+    HashMap<String,Products> list;
     private DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
 
    private CartAdapter adaptor;
@@ -88,6 +88,7 @@ public class CartFragment extends Fragment {
             public void onStateChanged(@NonNull View bottomSheet, int newState) {
                 if (newState==BottomSheetBehavior.STATE_HIDDEN)
                 { bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+
                     set_cart_summary();}
 
             }
@@ -118,9 +119,13 @@ public class CartFragment extends Fragment {
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                if (!(list ==null) &&!list.isEmpty())
                 list.clear();
+
                 final String email= Prevalent.userEmail;
                 reference.child("Users").child(email).child("invoices").child(((int)total_price)+"-"+size+"-"+((int)(total_price - 10 + 30))).removeValue();
+
                 reference.child("Users").child(email).child( "Cart").removeValue();
 
                 itemCount.setText("Subtotal (" + 0 + " item)");
@@ -131,15 +136,17 @@ public class CartFragment extends Fragment {
         });
     }
 
+
     @SuppressLint("SetTextI18n")
     private void set_cart_summary() {
-        if (!adaptor.getPtotal_price().isEmpty()) {
+        
+        if (!adaptor.getTotal_price().isEmpty()) {
              total_price = 0;
              size=0;
-            list = adaptor.getPtotal_price();
-            for (double i : list.values()) {
+            list = adaptor.getTotal_price();
+            for (Products i : list.values()) {
 
-                total_price += i;
+                total_price +=Double.valueOf( i.getTotal_price().replace(" LE",""));
                     size++;
 
             }
@@ -180,7 +187,7 @@ public class CartFragment extends Fragment {
         super.onStart();
         FirebaseRecyclerOptions<Products> options_Fruit = new FirebaseRecyclerOptions.Builder<Products>()
                 .setQuery(postReference, Products.class).build();
-
+        
 
          adaptor = new CartAdapter(options_Fruit);
         recyclerView.setAdapter(adaptor);

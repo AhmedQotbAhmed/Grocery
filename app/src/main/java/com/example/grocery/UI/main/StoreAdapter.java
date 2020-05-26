@@ -52,12 +52,13 @@ public class StoreAdapter extends FirebaseRecyclerAdapter<Products, StoreAdapter
 
     @Override
     protected void onBindViewHolder(@NonNull final ItemViewHolder holder, int position, @NonNull final Products model) {
-       String name= model.getName_str();
+
 
 //        Log.e("name",name);
 
         holder.product_name.setText(model.getName_str() + "");
         holder.product_price.setText(model.getPrice_str() + " LE");
+
 
         Picasso.get().load(model.getUri()).into(holder.product_Image);
         holder.product_favourite_it.setOnClickListener(new View.OnClickListener() {
@@ -100,11 +101,8 @@ public class StoreAdapter extends FirebaseRecyclerAdapter<Products, StoreAdapter
 
     private void Add_to_cart_PostData(Products product) {
 
-
 //      product    ,   price_str ,  itemCategory and uri this is our post data
         final String email= Prevalent.userEmail;
-        Log.e("email",email+"");
-
         reference.child("Users").child(email).child("Cart").child(product.getName_str())
                 .setValue(product)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -118,17 +116,16 @@ public class StoreAdapter extends FirebaseRecyclerAdapter<Products, StoreAdapter
                             Toast.makeText(context, "Network Error: please try again...", Toast.LENGTH_LONG).show();
 
 
-                        }
-                    }
+                        }}
+
                 });
+
 
     } private void Add_to_favourite_PostData(Products product) {
 
 
 //      product    ,   price_str ,  itemCategory and uri this is our post data
         final String email= Prevalent.userEmail;
-        Log.e("email",email+"");
-
         reference.child("Users").child(email).child("favourite").child(product.getName_str())
                 .setValue(product)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {

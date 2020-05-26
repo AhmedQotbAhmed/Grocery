@@ -5,7 +5,7 @@
     android:orientation="vertical" android:layout_width="164dp"
     android:layout_height="201dp"
     android:background="#fff"
-    android:paddingHorizontal="5dp"
+
     android:id="@+id/linearLayout_cart"
     android:layout_marginLeft="5dp"
     android:weightSum="3">

@@ -22,7 +22,7 @@ public class CartItem {
         quantity = Double.valueOf(quantity_str.replace(" k", ""));
         quantity += 0.25;
         totalPrice=price*quantity;
-        return quantity + " k";
+        return quantity + "";
     }
 
     public String minusOprition(String quantity_str) {
@@ -32,19 +32,19 @@ public class CartItem {
 
             quantity -= 0.25;
             totalPrice=price*quantity;
-            return quantity + " k";
+            return quantity + "";
         }
         else {
             quantity = Double.valueOf(quantity_str.replace(" k", "")) ;
             quantity = 0.25;
             totalPrice=price*quantity;
-            return quantity + " k";
+            return quantity + "";
         }
     }
 
     public String getTotalPrice() {
 
-        return totalPrice+" LE";
+        return totalPrice+"";
     }
 
     public double get_Total_Price() {
