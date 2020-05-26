@@ -205,8 +205,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    public void logout(){
-        Paper.book().destroy();
+
+
+
+    @Override
+    public void onBackPressed() {
 
     }
 }

@@ -1,7 +1,10 @@
 package com.example.grocery.fragment;
 
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -14,6 +17,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.grocery.MainActivity;
 import com.example.grocery.R;
 import com.example.grocery.prevalent.Prevalent;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -31,6 +35,7 @@ import com.squareup.picasso.Picasso;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 import static android.app.Activity.RESULT_OK;
+import static android.content.Context.MODE_PRIVATE;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -42,6 +47,7 @@ public class ProfileFragment extends Fragment {
     private DatabaseReference userReference;
     private TextView email_txv;
     private TextView name_txv;
+    private TextView logout_prof;
     private TextView phone_txv;
     private Uri  uri;
     private String myUri;
@@ -58,6 +64,8 @@ public class ProfileFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view=  inflater.inflate(R.layout.fragment_profile, container, false);
 
+
+        logout_prof=view.findViewById(R.id.logout_prof);
           email_txv= view.findViewById(R.id.email_txv);
           name_txv= view.findViewById(R.id.name_txv);
           phone_txv= view.findViewById(R.id.phone_txv);
@@ -65,6 +73,32 @@ public class ProfileFragment extends Fragment {
         profileImage=view.findViewById(R.id.profile_image);
         userReference = FirebaseDatabase.getInstance().getReference().child("Users").child(email).child("profile_inf");
         // Inflate the layout for this fragment
+
+        logout_prof.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                AlertDialog alertDialog = new AlertDialog.Builder(getContext()).create();
+                alertDialog.setTitle("Alert");
+                alertDialog.setMessage("  Are you sure, you want Logout");
+                alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                 SharedPreferences sp;
+                                 SharedPreferences.Editor Ed;
+                                sp=getContext().getSharedPreferences("userLogin", MODE_PRIVATE);
+                                sp.edit().remove("Unm").apply();
+                                sp.edit().remove("Psw").apply();
+                                startActivity(new Intent(getContext(), MainActivity.class));
+                                dialog.dismiss();
+                            }
+                        });
+                alertDialog.show();
+
+
+            }
+        });
         userReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

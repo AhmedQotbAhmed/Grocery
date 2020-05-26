@@ -6,22 +6,33 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.grocery.R;
+import com.example.grocery.UI.main.CategoryAdapter;
 import com.example.grocery.UI.main.StoreAdapter;
+import com.example.grocery.model.Category;
 import com.example.grocery.model.Products;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.List;
 
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class StoreFragment extends Fragment {
+
+
+List<Products>list;
 
 
     public StoreFragment() {
@@ -35,6 +46,7 @@ public class StoreFragment extends Fragment {
     private RecyclerView recyclerView_Fruit;
     private RecyclerView recyclerView_Vegetables;
     private RecyclerView recyclerView_Other;
+    private DatabaseReference Reference;
 
 //    private CartAdapter adaptor;
 
@@ -45,6 +57,9 @@ public class StoreFragment extends Fragment {
         // Inflate the layout for this fragment
         //   "Fruit", "Vegetables",  "Other"
 
+     Reference = FirebaseDatabase.getInstance().getReference().child("products");
+
+        /////////////////////////////////////////////////////////////////////////////////////
         postReference_Fruit = FirebaseDatabase.getInstance().getReference().child("products").child( "Fruit");
         postReference_Vegetables = FirebaseDatabase.getInstance().getReference().child("products").child( "Vegetables");
         postReference_Other = FirebaseDatabase.getInstance().getReference().child("products").child( "Other");
@@ -65,6 +80,15 @@ public class StoreFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
+
+
+
+
+
+
+
+
+
         FirebaseRecyclerOptions<Products> options_Fruit = new FirebaseRecyclerOptions.Builder<Products>()
                 .setQuery(postReference_Fruit, Products.class).build();
     FirebaseRecyclerOptions<Products> options_Vegetables = new FirebaseRecyclerOptions.Builder<Products>()
@@ -83,6 +107,44 @@ public class StoreFragment extends Fragment {
         StoreAdapter adaptor_Other = new StoreAdapter(options__Other);
         recyclerView_Other.setAdapter(adaptor_Other);
         adaptor_Other.startListening();
+
+
+/////////////////////////////////////////////////////
+
+//        FirebaseRecyclerOptions.Builder<<List<Products>> categoryBuilder = new FirebaseRecyclerOptions.Builder<<List<Products>>();
+//        categoryBuilder.setQuery(postReference_Other, List.class );
+
+        Reference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                for (DataSnapshot CategorySnapshot : dataSnapshot.getChildren()) {
+
+                    for (DataSnapshot snapshot : CategorySnapshot.getChildren()) {
+
+                        CategoryAdapter adaptor = new CategoryAdapter(snapshot);
+                        recyclerView_Fruit.setAdapter(adaptor);
+
+
+
+                    }
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+});
+
+
+
+
+        adaptor_Fruit.startListening();
+
+
+
 
     }
 
