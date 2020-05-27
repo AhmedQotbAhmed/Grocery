@@ -111,37 +111,7 @@ List<Products>list;
 
 /////////////////////////////////////////////////////
 
-//        FirebaseRecyclerOptions.Builder<<List<Products>> categoryBuilder = new FirebaseRecyclerOptions.Builder<<List<Products>>();
-//        categoryBuilder.setQuery(postReference_Other, List.class );
 
-        Reference.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
-                for (DataSnapshot CategorySnapshot : dataSnapshot.getChildren()) {
-
-                    for (DataSnapshot snapshot : CategorySnapshot.getChildren()) {
-
-                        CategoryAdapter adaptor = new CategoryAdapter(snapshot);
-                        recyclerView_Fruit.setAdapter(adaptor);
-
-
-
-                    }
-                }
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-});
-
-
-
-
-        adaptor_Fruit.startListening();
 
 
 
