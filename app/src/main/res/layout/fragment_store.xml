@@ -6,112 +6,173 @@
     android:layout_height="match_parent"
     tools:context=".fragment.StoreFragment"
     android:background="#52C0C0C0">
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <TextView
-            android:id="@+id/Category_Fruit"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="32dp"
-            android:layout_marginBottom="16dp"
-            android:text=" Grocery Fruit"
-            android:textColor="@color/colorAccent"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/recycler_store_Fruit"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="SmallSp" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_store_Fruit"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent">
 
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:orientation="horizontal"
-            android:paddingLeft="12dp"
-            android:paddingTop="0dp"
-            android:paddingRight="12dp"
-            android:paddingBottom="0dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/Category_Fruit" />
+            <TextView
+                android:id="@+id/Category_Fruit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginBottom="16dp"
+                android:text=" Grocery Fruit"
+                android:textColor="@color/colorAccent"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/recycler_store_Fruit"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="SmallSp" />
+
+            <TextView
+                android:id="@+id/viewAll_fruit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:layout_marginEnd="8dp"
+                android:text="View all >"
+                android:textColor="@color/colorAccent"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/recycler_store_Fruit"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.96"
+                app:layout_constraintStart_toEndOf="@+id/Category_Fruit"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0"
+                tools:ignore="SmallSp"
+                tools:layout_conversion_absoluteHeight="19dp"
+                tools:layout_conversion_absoluteWidth="411dp" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_store_Fruit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:orientation="horizontal"
+                android:paddingLeft="12dp"
+                android:paddingTop="0dp"
+                android:paddingRight="12dp"
+                android:paddingBottom="0dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/Category_Fruit" />
 
 
 
 
-        <TextView
-            android:id="@+id/Category_Vegetables"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="34dp"
-            android:layout_marginBottom="16dp"
-            android:text=" Grocery Vegetables"
-            android:textColor="@color/colorAccent"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/recycler_store_Fruit"
-            tools:ignore="SmallSp" />
+            <TextView
+                android:id="@+id/Category_Vegetables"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="34dp"
+                android:layout_marginBottom="16dp"
+                android:text=" Grocery Vegetables"
+                android:textColor="@color/colorAccent"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/recycler_store_Fruit"
+                tools:ignore="SmallSp" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_Vegetables"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
+            <TextView
+                android:id="@+id/viewAll_Vegetables"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="9dp"
+                android:text="View all >"
+                android:textColor="@color/colorAccent"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/recycler_Vegetables"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toEndOf="@+id/Category_Vegetables"
+                app:layout_constraintTop_toBottomOf="@+id/recycler_store_Fruit"
+                app:layout_constraintVertical_bias="0.0"
+                tools:ignore="SmallSp"
+                tools:layout_conversion_absoluteHeight="19dp"
+                tools:layout_conversion_absoluteWidth="411dp" />
 
-            android:orientation="horizontal"
-            android:paddingLeft="12dp"
-            android:paddingTop="0dp"
-            android:paddingRight="12dp"
-            android:paddingBottom="0dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.4"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/Category_Vegetables" />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_Vegetables"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+
+                android:orientation="horizontal"
+                android:paddingLeft="12dp"
+                android:paddingTop="0dp"
+                android:paddingRight="12dp"
+                android:paddingBottom="0dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.4"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/Category_Vegetables" />
 
 
 
-        <TextView
-            android:id="@+id/Category_Other"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="34dp"
-            android:layout_marginBottom="16dp"
-            android:text=" Grocery Other"
-            android:textColor="@color/colorAccent"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/recycler_Vegetables"
-            tools:ignore="SmallSp" />
+            <TextView
+                android:id="@+id/Category_Other"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="34dp"
+                android:layout_marginBottom="16dp"
+                android:text=" Grocery Other"
+                android:textColor="@color/colorAccent"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/recycler_Vegetables"
+                tools:ignore="SmallSp" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_Other"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="50dp"
+            <TextView
+                android:id="@+id/viewAll_Other"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:text="View all >"
+                android:textColor="@color/colorAccent"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/recycler_Other"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toEndOf="@+id/Category_Other"
+                app:layout_constraintTop_toBottomOf="@+id/recycler_Vegetables"
+                app:layout_constraintVertical_bias="0.74"
+                tools:ignore="SmallSp"
+                tools:layout_conversion_absoluteHeight="19dp"
+                tools:layout_conversion_absoluteWidth="411dp" />
 
-            android:orientation="horizontal"
-            android:paddingLeft="12dp"
-            android:paddingTop="0dp"
-            android:paddingRight="12dp"
-            android:paddingBottom="0dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/Category_Other" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_Other"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="50dp"
+
+                android:orientation="horizontal"
+                android:paddingLeft="12dp"
+                android:paddingTop="0dp"
+                android:paddingRight="12dp"
+                android:paddingBottom="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/Category_Other" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 
 </ScrollView>

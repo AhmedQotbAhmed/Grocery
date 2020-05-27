@@ -80,6 +80,8 @@ public class StoreAdapter extends FirebaseRecyclerAdapter<Products, StoreAdapter
 
 
     class ItemViewHolder extends RecyclerView.ViewHolder {
+
+
         ImageView product_Image;
         ImageView product_favourite_it;
         TextView product_name;
@@ -88,6 +90,7 @@ public class StoreAdapter extends FirebaseRecyclerAdapter<Products, StoreAdapter
 
         ItemViewHolder(@NonNull View itemView) {
             super(itemView);
+
             product_favourite_it=itemView.findViewById(R.id.product_favourite_it);
             linearLayout=itemView.findViewById(R.id.linearLayout_cart);
             product_Image = itemView.findViewById(R.id.product_image_it);
