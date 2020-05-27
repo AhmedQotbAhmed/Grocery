@@ -1,4 +1,4 @@
-package com.example.grocery.UI.main;
+package com.example.grocery.UI.adapter;
 
 import android.content.Context;
 

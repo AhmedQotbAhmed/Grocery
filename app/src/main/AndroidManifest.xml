@@ -13,11 +13,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".SeeAll_Activity"></activity>
-        <activity android:name=".HomeActivity" />
-        <activity android:name=".CheckoutActivity" />
-        <activity android:name=".SignUpActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".subactivity.ChangePassword"></activity>
+        <activity android:name=".subactivity.SeeAll_Activity" />
+        <activity android:name=".UI.activity.HomeActivity" />
+        <activity android:name=".subactivity.CheckoutActivity" />
+        <activity android:name=".UI.activity.SignUpActivity" />
+        <activity android:name=".UI.activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

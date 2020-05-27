@@ -17,7 +17,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.grocery.MainActivity;
+import com.example.grocery.UI.activity.MainActivity;
 import com.example.grocery.R;
 import com.example.grocery.prevalent.Prevalent;
 import com.google.android.gms.tasks.OnCompleteListener;

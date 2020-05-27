@@ -1,4 +1,4 @@
-package com.example.grocery;
+package com.example.grocery.subactivity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -6,9 +6,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
 
-import com.example.grocery.UI.main.ViewAllAdapter;
+import com.example.grocery.R;
+import com.example.grocery.UI.adapter.ViewAllAdapter;
 import com.example.grocery.model.Products;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DatabaseReference;

@@ -19,9 +19,9 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.grocery.CheckoutActivity;
+import com.example.grocery.subactivity.CheckoutActivity;
 import com.example.grocery.R;
-import com.example.grocery.UI.main.CartAdapter;
+import com.example.grocery.UI.adapter.CartAdapter;
 import com.example.grocery.model.Products;
 import com.example.grocery.prevalent.Prevalent;
 import com.firebase.ui.database.FirebaseRecyclerOptions;

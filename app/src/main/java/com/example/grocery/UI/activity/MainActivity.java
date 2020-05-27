@@ -1,4 +1,4 @@
-package com.example.grocery;
+package com.example.grocery.UI.activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,6 +16,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.grocery.R;
 import com.example.grocery.model.User;
 import com.example.grocery.prevalent.Prevalent;
 import com.google.firebase.FirebaseApp;
@@ -26,8 +27,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.pedromassango.doubleclick.DoubleClick;
 import com.pedromassango.doubleclick.DoubleClickListener;
-
-import io.paperdb.Paper;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -161,7 +160,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             loadingBar.dismiss();
                             Prevalent.currentOnlineUser =userData;
                             Prevalent.userEmail=email;
-                            startActivity(new Intent(MainActivity.this,HomeActivity.class));
+                            startActivity(new Intent(MainActivity.this, HomeActivity.class));
                         }
                         else {
                             loadingBar.dismiss();
@@ -195,7 +194,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.sign_up_btn:
-                startActivity( new Intent(this,SignUpActivity.class));
+                startActivity( new Intent(this, SignUpActivity.class));
                 break;
 
 

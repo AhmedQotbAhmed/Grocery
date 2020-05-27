@@ -1,4 +1,4 @@
-package com.example.grocery.UI.main;
+package com.example.grocery.UI.adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;

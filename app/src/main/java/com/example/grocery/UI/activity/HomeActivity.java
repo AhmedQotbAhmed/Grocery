@@ -1,4 +1,4 @@
-package com.example.grocery;
+package com.example.grocery.UI.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
@@ -6,7 +6,7 @@ import androidx.viewpager.widget.ViewPager;
 import android.os.Bundle;
 
 import com.example.grocery.R;
-import com.example.grocery.UI.main.FragmentAdapter;
+import com.example.grocery.UI.adapter.FragmentAdapter;
 import com.google.android.material.tabs.TabLayout;
 
 public class HomeActivity extends AppCompatActivity  {

@@ -3,27 +3,23 @@ package com.example.grocery.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.grocery.R;
-import com.example.grocery.SeeAll_Activity;
-import com.example.grocery.UI.main.StoreAdapter;
-import com.example.grocery.UI.main.ViewAllAdapter;
+import com.example.grocery.subactivity.SeeAll_Activity;
+import com.example.grocery.UI.adapter.StoreAdapter;
 import com.example.grocery.model.Products;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.io.Serializable;
 import java.util.List;
 
 

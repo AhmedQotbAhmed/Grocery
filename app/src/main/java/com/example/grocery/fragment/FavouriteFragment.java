@@ -5,17 +5,14 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.grocery.R;
-import com.example.grocery.UI.main.CartAdapter;
-import com.example.grocery.UI.main.FavouriteAdapter;
+import com.example.grocery.UI.adapter.FavouriteAdapter;
 import com.example.grocery.model.Products;
 import com.example.grocery.prevalent.Prevalent;
 import com.firebase.ui.database.FirebaseRecyclerOptions;

@@ -1,4 +1,4 @@
-package com.example.grocery;
+package com.example.grocery.UI.activity;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -13,6 +13,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.grocery.R;
 import com.example.grocery.model.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -150,7 +151,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                                         Toast.makeText(SignUpActivity.this, "Congratulations," +
                                                 "your account has been created", Toast.LENGTH_LONG).show();
 
-                                        startActivity(new Intent(SignUpActivity.this,MainActivity.class));
+                                        startActivity(new Intent(SignUpActivity.this, MainActivity.class));
                                         loadingBar.dismiss();
                                     }
                                     else{

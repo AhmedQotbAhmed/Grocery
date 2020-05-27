@@ -1,4 +1,4 @@
-package com.example.grocery.UI.main;
+package com.example.grocery.UI.adapter;
 
 import android.content.Context;
 import android.util.Log;
@@ -26,7 +26,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
 
 
-public class ViewAllAdapter extends FirebaseRecyclerAdapter<Products, ViewAllAdapter.ItemHolder> {
+public class FavouriteAdapter extends FirebaseRecyclerAdapter<Products, FavouriteAdapter.ItemHolder> {
     private  Context context;
 
     private DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
@@ -40,7 +40,7 @@ public class ViewAllAdapter extends FirebaseRecyclerAdapter<Products, ViewAllAda
      *
      * @param options
      */
-    public ViewAllAdapter(@NonNull FirebaseRecyclerOptions<Products> options) {
+    public FavouriteAdapter(@NonNull FirebaseRecyclerOptions<Products> options) {
         super(options);
 
     }
@@ -66,7 +66,6 @@ public class ViewAllAdapter extends FirebaseRecyclerAdapter<Products, ViewAllAda
 //        holder.linearLayout;
 
         this.holder = holder;
-        holder.product_favourite_fa.setImageResource(R.drawable.ic_not__favorite);
         holder.product_price.setText(model.getPrice_str() + " LE");
         Picasso.get().load(model.getUri()).into(holder.product_Image);
         holder.product_name.setText(model.getName_str());
@@ -78,8 +77,8 @@ public class ViewAllAdapter extends FirebaseRecyclerAdapter<Products, ViewAllAda
             @Override
             public void onClick(View v) {
                 ImageView  product_favourite_fa=v.findViewById(R.id.product_favourite_fa);
-                product_favourite_fa.setImageResource(R.drawable.ic_favorite);
-                Add_to_favourite_PostData( model);
+                product_favourite_fa.setImageResource(R.drawable.ic_not__favorite);
+                delete_data( model.getName_str());
             }
         });
 
@@ -97,32 +96,16 @@ public class ViewAllAdapter extends FirebaseRecyclerAdapter<Products, ViewAllAda
     }
 
 
-
-
-
-    private void Add_to_favourite_PostData(Products product) {
-
-
-//      product    ,   price_str ,  itemCategory and uri this is our post data
+    private void delete_data(String name) {
         final String email= Prevalent.userEmail;
-        reference.child("Users").child(email).child("favourite").child(product.getName_str())
-                .setValue(product)
-                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        if (task.isSuccessful()) {
-                            Toast.makeText(context, "Add to favourite", Toast.LENGTH_SHORT).show();
+        reference = FirebaseDatabase.getInstance().getReference().child("Users").child(email).child( "favourite");
+        reference.child(name).removeValue();
 
 
-                        } else {
-                            Toast.makeText(context, "Network Error: please try again...", Toast.LENGTH_LONG).show();
-
-
-                        }
-                    }
-                });
 
     }
+
+
 
     private void Add_to_cart_PostData(Products product) {
 
@@ -154,7 +137,7 @@ public class ViewAllAdapter extends FirebaseRecyclerAdapter<Products, ViewAllAda
         public class ItemHolder extends RecyclerView.ViewHolder {
 
 
-             ImageView product_favourite_it;
+            public ImageView product_favourite_it;
             ImageView product_Image;
             ImageView product_favourite_fa;
             TextView product_name;

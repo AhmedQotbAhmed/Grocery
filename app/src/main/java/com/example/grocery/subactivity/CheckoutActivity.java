@@ -1,8 +1,10 @@
-package com.example.grocery;
+package com.example.grocery.subactivity;
 
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.grocery.R;
 
 public class CheckoutActivity extends AppCompatActivity {
     @Override
