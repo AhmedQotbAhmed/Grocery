@@ -33,8 +33,8 @@ import java.util.HashMap;
 public class CartAdapter extends FirebaseRecyclerAdapter<Products, CartAdapter.ItemHolder> {
     private  Context context;
 
-@SuppressLint("UseSparseArrays")
-HashMap<String,Products> total_price =new HashMap<>();
+    @SuppressLint("UseSparseArrays")
+    HashMap<String, Products> total_price = new HashMap<>();
 
     private DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
 
@@ -133,7 +133,7 @@ HashMap<String,Products> total_price =new HashMap<>();
                     holder.quantity_txv.setText(quan+ " k");
                     holder.total_price.setText(cartItem.getTotalPrice()+" LE");
 
-                    model.setTotal_price(cartItem.getTotalPrice()+" LE");
+                model.setTotal_price(cartItem.getTotalPrice());
                     model.setQuantity(quan);
 
                     total_price.put(holder.product_name.getText().toString(), model);
@@ -185,7 +185,8 @@ HashMap<String,Products> total_price =new HashMap<>();
 
                         }
                     }
-                });}
+                });
+    }
 
     public class ItemHolder extends RecyclerView.ViewHolder {
 

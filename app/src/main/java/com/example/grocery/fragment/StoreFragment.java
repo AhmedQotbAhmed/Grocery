@@ -60,9 +60,7 @@ List<Products>list;
      Reference = FirebaseDatabase.getInstance().getReference().child("products");
 
         /////////////////////////////////////////////////////////////////////////////////////
-        postReference_Fruit = FirebaseDatabase.getInstance().getReference().child("products").child( "Fruit");
-        postReference_Vegetables = FirebaseDatabase.getInstance().getReference().child("products").child( "Vegetables");
-        postReference_Other = FirebaseDatabase.getInstance().getReference().child("products").child( "Other");
+
 
         recyclerView_Fruit= view.findViewById(R.id.recycler_store_Fruit);
         recyclerView_Vegetables= view.findViewById(R.id.recycler_Vegetables);
@@ -81,13 +79,9 @@ List<Products>list;
     public void onStart() {
         super.onStart();
 
-
-
-
-
-
-
-
+        postReference_Fruit = FirebaseDatabase.getInstance().getReference().child("products").child( "Fruit");
+        postReference_Vegetables = FirebaseDatabase.getInstance().getReference().child("products").child( "Vegetables");
+        postReference_Other = FirebaseDatabase.getInstance().getReference().child("products").child( "Other");
 
         FirebaseRecyclerOptions<Products> options_Fruit = new FirebaseRecyclerOptions.Builder<Products>()
                 .setQuery(postReference_Fruit, Products.class).build();
@@ -111,10 +105,12 @@ List<Products>list;
 
 /////////////////////////////////////////////////////
 
+    }
 
 
-
-
+    @Override
+    public void onStop() {
+        super.onStop();
 
     }
 

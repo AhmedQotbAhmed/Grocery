@@ -40,6 +40,8 @@ public class CartItem {
             totalPrice=price*quantity;
             return quantity + "";
         }
+
+
     }
 
     public String getTotalPrice() {
