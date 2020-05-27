@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -70,7 +71,7 @@ public class ViewAllAdapter extends FirebaseRecyclerAdapter<Products, ViewAllAda
         holder.product_price.setText(model.getPrice_str() + " LE");
         Picasso.get().load(model.getUri()).into(holder.product_Image);
         holder.product_name.setText(model.getName_str());
-
+        holder.linearLayout.setAnimation(AnimationUtils.loadAnimation(context, R.anim.content_transition_animation));
 
 
 
@@ -170,4 +171,5 @@ public class ViewAllAdapter extends FirebaseRecyclerAdapter<Products, ViewAllAda
 
           }
     }
+
 }

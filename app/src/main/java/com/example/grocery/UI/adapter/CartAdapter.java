@@ -36,7 +36,7 @@ public class CartAdapter extends FirebaseRecyclerAdapter<Products, CartAdapter.I
     @SuppressLint("UseSparseArrays")
     HashMap<String, Products> total_price = new HashMap<>();
 
-    private DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
+    private DatabaseReference reference ;
 
     private CartItem cartItem;
     private  ItemHolder holder;
@@ -167,7 +167,7 @@ public class CartAdapter extends FirebaseRecyclerAdapter<Products, CartAdapter.I
 
     private void Add_to_cart_PostData(Products product) {
 
-
+        reference= FirebaseDatabase.getInstance().getReference();
 //      product    ,   price_str ,  itemCategory and uri this is our post data
         final String email= Prevalent.userEmail;
         Log.e("email",email+"");

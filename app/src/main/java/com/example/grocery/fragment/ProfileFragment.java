@@ -52,7 +52,6 @@ public class ProfileFragment extends Fragment {
     private TextView change_password;
     private TextView phone_txv;
     private Uri  uri;
-    private String myUri;
     final StorageReference storageReference= FirebaseStorage.getInstance().getReference("Users");
     final String email = Prevalent.userEmail;
 

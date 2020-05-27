@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.grocery.R;
-import com.example.grocery.subactivity.SeeAll_Activity;
+import com.example.grocery.subactivity.ViewAll_Activity;
 import com.example.grocery.UI.adapter.StoreAdapter;
 import com.example.grocery.model.Products;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
@@ -90,7 +90,7 @@ public class StoreFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                startActivity(new Intent(getContext(), SeeAll_Activity.class).putExtra("ref", "Fruit" ));
+                startActivity(new Intent(getContext(), ViewAll_Activity.class).putExtra("ref", "Fruit" ));
 
 
 
@@ -99,7 +99,7 @@ public class StoreFragment extends Fragment {
         product_seeAll_v.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getContext(), SeeAll_Activity.class).putExtra("ref","Vegetables" ));
+                startActivity(new Intent(getContext(), ViewAll_Activity.class).putExtra("ref","Vegetables" ));
 
 
             }
@@ -107,7 +107,7 @@ public class StoreFragment extends Fragment {
         product_seeAll_o.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getContext(), SeeAll_Activity.class).putExtra("ref", "Other"));
+                startActivity(new Intent(getContext(), ViewAll_Activity.class).putExtra("ref", "Other"));
 
 
 

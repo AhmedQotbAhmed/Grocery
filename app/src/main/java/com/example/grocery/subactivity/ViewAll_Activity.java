@@ -15,7 +15,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 
-public class SeeAll_Activity extends AppCompatActivity {
+public class ViewAll_Activity extends AppCompatActivity {
     private RecyclerView recyclerView;
     FirebaseRecyclerOptions<Products> options;
 

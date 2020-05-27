@@ -14,7 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".subactivity.ChangePassword"></activity>
-        <activity android:name=".subactivity.SeeAll_Activity" />
+        <activity android:name=".subactivity.ViewAll_Activity" />
         <activity android:name=".UI.activity.HomeActivity" />
         <activity android:name=".subactivity.CheckoutActivity" />
         <activity android:name=".UI.activity.SignUpActivity" />
