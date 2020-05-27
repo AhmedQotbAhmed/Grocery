@@ -20,6 +20,7 @@ import android.widget.Toast;
 import com.example.grocery.UI.activity.MainActivity;
 import com.example.grocery.R;
 import com.example.grocery.prevalent.Prevalent;
+import com.example.grocery.subactivity.ChangePassword;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
@@ -48,11 +49,12 @@ public class ProfileFragment extends Fragment {
     private TextView email_txv;
     private TextView name_txv;
     private TextView logout_prof;
+    private TextView change_password;
     private TextView phone_txv;
     private Uri  uri;
     private String myUri;
     final StorageReference storageReference= FirebaseStorage.getInstance().getReference("Users");
-    final String email = Prevalent.userEmail;;
+    final String email = Prevalent.userEmail;
 
     public ProfileFragment() {
 
@@ -62,9 +64,10 @@ public class ProfileFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         View view=  inflater.inflate(R.layout.fragment_profile, container, false);
 
-
+        change_password=view.findViewById(R.id.change_password_prof);
         logout_prof=view.findViewById(R.id.logout_prof);
           email_txv= view.findViewById(R.id.email_txv);
           name_txv= view.findViewById(R.id.name_txv);
@@ -86,7 +89,7 @@ public class ProfileFragment extends Fragment {
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
                                  SharedPreferences sp;
-                                 SharedPreferences.Editor Ed;
+
                                 sp=getContext().getSharedPreferences("userLogin", MODE_PRIVATE);
                                 sp.edit().remove("Unm").apply();
                                 sp.edit().remove("Psw").apply();
@@ -148,6 +151,15 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 selectImage();
+
+            }
+        });
+
+        change_password.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getContext(), ChangePassword.class));
+
 
             }
         });
