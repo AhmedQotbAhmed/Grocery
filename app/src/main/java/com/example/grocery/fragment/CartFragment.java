@@ -57,8 +57,9 @@ public class CartFragment extends Fragment {
     public CartFragment() {
         // Required empty public constructor
     }
+
     private double total_price = 0;
-   private int size=0;
+    private int size=0;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -109,7 +110,7 @@ public class CartFragment extends Fragment {
         paynow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!totalprice_payment.getText().toString().equals("EL, " + 0.0))
+                if (!totalprice_payment.getText().toString().equals(+ 0.0+"  EL" ))
                 {  upload_Invoices ();
 
                 startActivity(new Intent(getContext(), CheckoutActivity.class).putExtra("inv",list));
@@ -132,8 +133,8 @@ public class CartFragment extends Fragment {
                 reference.child("Users").child(email).child( "Cart").removeValue();
 
                 itemCount.setText("Subtotal (" + 0 + " item)");
-                totalprice.setText("EL, " + 0.0);
-                totalprice_payment.setText("EL, " + 0.0);
+                totalprice.setText(  0.0+"  EL");
+                totalprice_payment.setText(  0.0+"  EL");
 
             }
         });
@@ -155,8 +156,8 @@ public class CartFragment extends Fragment {
             }
 
             itemCount.setText("Subtotal (" + size + " item)");
-            totalprice.setText("EL, " + total_price);
-            totalprice_payment.setText("EL, " + (total_price - 10 + 30));
+            totalprice.setText( total_price+"  LE" );
+            totalprice_payment.setText((total_price - 10 + 30)+"  LE"  );
 
         }
     }
