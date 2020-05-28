@@ -123,17 +123,17 @@ public class StoreFragment extends Fragment {
         super.onStart();
 
 
-// GET THE Data from fireBase
-     options_Fruit = new FirebaseRecyclerOptions.Builder<Products>()
+        // GET THE Data from fireBase
+        options_Fruit = new FirebaseRecyclerOptions.Builder<Products>()
                 .setQuery(postReference_Fruit, Products.class).build();
 
-     options_Vegetables = new FirebaseRecyclerOptions.Builder<Products>()
+        options_Vegetables = new FirebaseRecyclerOptions.Builder<Products>()
                 .setQuery(postReference_Vegetables, Products.class).build();
 
-     options__Other = new FirebaseRecyclerOptions.Builder<Products>()
+        options__Other = new FirebaseRecyclerOptions.Builder<Products>()
                 .setQuery(postReference_Other, Products.class).build();
 
-     //set adapter with the data and recyclerView
+        //set adapter with the data and recyclerView
 
         StoreAdapter adaptor_Fruit = new StoreAdapter(options_Fruit);
         recyclerView_Fruit.setAdapter(adaptor_Fruit);

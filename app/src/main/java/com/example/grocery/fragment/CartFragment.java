@@ -31,6 +31,7 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.io.Serializable;
 import java.util.HashMap;
 
 
@@ -38,18 +39,18 @@ import java.util.HashMap;
  * A simple {@link Fragment} subclass.
  */
 public class CartFragment extends Fragment {
-    HashMap<String,Products> list;
-    private DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
+        private HashMap<String,Products> list;
+        private DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
 
-   private CartAdapter adaptor;
-   private RecyclerView recyclerView;
-   private ConstraintLayout cart_summary;
-   private BottomSheetBehavior bottomSheetBehavior;
-    private TextView itemCount ;
-    private TextView totalprice ;
-    private TextView totalprice_payment ;
-    private Button paynow;
-    private Button cancel;
+        private CartAdapter adaptor;
+        private RecyclerView recyclerView;
+        private ConstraintLayout cart_summary;
+        private BottomSheetBehavior bottomSheetBehavior;
+        private TextView itemCount ;
+        private TextView totalprice ;
+        private TextView totalprice_payment ;
+        private Button paynow;
+        private Button cancel;
 
 
         private DatabaseReference postReference;
@@ -111,7 +112,9 @@ public class CartFragment extends Fragment {
                 if (!totalprice_payment.getText().toString().equals("EL, " + 0.0))
                 {  upload_Invoices ();
 
-                startActivity(new Intent(getContext(), CheckoutActivity.class));}
+                startActivity(new Intent(getContext(), CheckoutActivity.class).putExtra("inv",list));
+
+                }
             }
         });
 
@@ -187,9 +190,8 @@ public class CartFragment extends Fragment {
         super.onStart();
         FirebaseRecyclerOptions<Products> options_Fruit = new FirebaseRecyclerOptions.Builder<Products>()
                 .setQuery(postReference, Products.class).build();
-        
 
-         adaptor = new CartAdapter(options_Fruit);
+        adaptor = new CartAdapter(options_Fruit);
         recyclerView.setAdapter(adaptor);
         adaptor.startListening();
 
