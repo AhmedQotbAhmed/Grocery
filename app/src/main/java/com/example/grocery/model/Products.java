@@ -12,6 +12,10 @@ public class Products implements Serializable {
 
 
 
+
+
+    public Products() { }
+
     public void setTotal_price(String total_price) {
         this.total_price = total_price;
     }
@@ -20,17 +24,12 @@ public class Products implements Serializable {
         this.quantity = quantity;
     }
 
-
-
     public String getTotal_price() {
         return total_price;
     }
 
     public String getQuantity() {
         return quantity;
-    }
-
-    public Products() {
     }
 
     public String getUri() {
