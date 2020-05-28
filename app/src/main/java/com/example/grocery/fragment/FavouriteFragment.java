@@ -1,8 +1,10 @@
 package com.example.grocery.fragment;
 
 
+import android.graphics.Color;
 import android.os.Bundle;
 
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -10,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 
 import com.example.grocery.R;
 import com.example.grocery.UI.adapter.FavouriteAdapter;
@@ -27,6 +30,9 @@ public class FavouriteFragment extends Fragment {
 
     private RecyclerView recyclerView;
     private DatabaseReference postReference;
+    private FavouriteAdapter adaptor;
+    private FrameLayout linearhom;
+
     public FavouriteFragment() {
         // Required empty public constructor
     }
@@ -37,6 +43,8 @@ public class FavouriteFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view=  inflater.inflate(R.layout.fragment_favourite, container, false);
         final String email= Prevalent.userEmail;
+        linearhom=view.findViewById(R.id.FrameLayout);
+
 
         postReference = FirebaseDatabase.getInstance().getReference().child("Users").child(email).child( "favourite");
         // Inflate the layout for this fragment
@@ -53,11 +61,24 @@ public class FavouriteFragment extends Fragment {
         FirebaseRecyclerOptions<Products> options_Fruit = new FirebaseRecyclerOptions.Builder<Products>()
                 .setQuery(postReference, Products.class).build();
 
-        FavouriteAdapter adaptor = new FavouriteAdapter(options_Fruit);
+         adaptor = new FavouriteAdapter(options_Fruit);
         recyclerView.setAdapter(adaptor);
         adaptor.startListening();
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (adaptor.getItemCount() == 0) {
+            // show my background image
+            linearhom.setBackgroundResource(R.drawable.favourite_empty);
+
+            // do stuff
+        } else {
+            linearhom.setBackgroundColor(Color.parseColor("#52C0C0C0"));
+            // RecyclerView stuff
+        }
+    }
 
 
 }

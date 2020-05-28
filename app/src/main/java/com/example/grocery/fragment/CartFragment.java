@@ -3,6 +3,7 @@ package com.example.grocery.fragment;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -15,6 +16,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -60,13 +62,15 @@ public class CartFragment extends Fragment {
 
     private double total_price = 0;
     private int size=0;
-
+    CoordinatorLayout linearhom;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view=  inflater.inflate(R.layout.fragment_cart, container, false);
         final String email= Prevalent.userEmail;
 
+
+        linearhom=view.findViewById(R.id.home_linear);
         postReference = FirebaseDatabase.getInstance().getReference().child("Users").child(email).child( "Cart");
         // Inflate the layout for this fragment
         recyclerView=view.findViewById(R.id.recycler_cart);
@@ -191,25 +195,27 @@ public class CartFragment extends Fragment {
         super.onStart();
         FirebaseRecyclerOptions<Products> options_Fruit = new FirebaseRecyclerOptions.Builder<Products>()
                 .setQuery(postReference, Products.class).build();
-
+//        ConstraintLayout linearhom;
+//        linearhom=super.findViewById(R.id.home_linear);
+//        linearhom.setBackgroundColor(Color.parseColor("#52C0C0C0"));
         adaptor = new CartAdapter(options_Fruit);
         recyclerView.setAdapter(adaptor);
+
         adaptor.startListening();
 
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (adaptor.getItemCount() == 0) {
+            // show my background image
+            linearhom.setBackgroundResource(R.drawable.empty);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+            // do stuff
+        } else {
+            linearhom.setBackgroundColor(Color.parseColor("#52C0C0C0"));
+            // RecyclerView stuff
+        }
+    }
 }

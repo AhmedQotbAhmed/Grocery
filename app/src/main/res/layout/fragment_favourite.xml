@@ -3,7 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#52C0C0C0"
+
+android:id="@+id/FrameLayout"
+
     tools:context=".fragment.FavouriteFragment"
     android:paddingLeft="12dp"
     android:paddingTop="12dp"
@@ -12,7 +14,7 @@
 
 
     <androidx.recyclerview.widget.RecyclerView
-        android:background="#52C0C0C0"
+
         android:id="@+id/recycler_Favourite"
         android:layout_height="match_parent"
         android:layout_width="match_parent"
