@@ -10,7 +10,6 @@
     >
 <!--    android:background="#52C0C0C0"-->
     <androidx.recyclerview.widget.RecyclerView
-
         android:id="@+id/recycler_cart"
         android:layout_height="match_parent"
         android:layout_width="match_parent"

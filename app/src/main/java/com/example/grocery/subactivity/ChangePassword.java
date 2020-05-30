@@ -42,7 +42,7 @@ public class ChangePassword extends AppCompatActivity implements View.OnClickLis
         curr_ps_txv = findViewById(R.id.curr_ps);
         new_ps_txv = findViewById(R.id.new_ps);
         new_confirm_ps_txv = findViewById(R.id.new_confirm_ps);
-        update_ps_btn = findViewById(R.id.update_ps);
+        update_ps_btn = findViewById(R.id.update_btn_ps);
 
 
         update_ps_btn.setOnClickListener(this);

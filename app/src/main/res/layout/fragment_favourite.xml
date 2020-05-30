@@ -3,9 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
-android:id="@+id/FrameLayout"
-
+    android:id="@+id/FrameLayout"
     tools:context=".fragment.FavouriteFragment"
     android:paddingLeft="12dp"
     android:paddingTop="12dp"

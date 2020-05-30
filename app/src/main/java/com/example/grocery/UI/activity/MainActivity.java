@@ -211,4 +211,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onBackPressed() {
 
     }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+          signIn_Content=null;
+          email_edt=null;
+          password_edt=null;
+          loadingBar=null;
+          chBx_rememberMe=null;
+          sp=null;
+          Ed=null;
+           rootRef=null;
+    }
 }

@@ -81,6 +81,7 @@ public class CartFragment extends Fragment {
         return view;
     }
 
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -89,14 +90,13 @@ public class CartFragment extends Fragment {
 
         paynow=view.findViewById(R.id.paynow_btn);
         cancel=view.findViewById(R.id.cancel_btn);
-        bottomSheetBehavior.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
+        bottomSheetBehavior.addBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
             @Override
             public void onStateChanged(@NonNull View bottomSheet, int newState) {
                 if (newState==BottomSheetBehavior.STATE_HIDDEN)
                 { bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
 
                     set_cart_summary();}
-
             }
 
             @Override
@@ -114,11 +114,10 @@ public class CartFragment extends Fragment {
         paynow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!totalprice_payment.getText().toString().equals(+ 0.0+"  EL" ))
+                if (!totalprice_payment.getText().toString().equals(+ 0.0+"  LE" ))
                 {  upload_Invoices ();
 
                 startActivity(new Intent(getContext(), CheckoutActivity.class).putExtra("inv",list));
-
                 }
             }
         });
@@ -133,12 +132,10 @@ public class CartFragment extends Fragment {
 
                 final String email= Prevalent.userEmail;
                 reference.child("Users").child(email).child("invoices").child(((int)total_price)+"-"+size+"-"+((int)(total_price - 10 + 30))).removeValue();
-
                 reference.child("Users").child(email).child( "Cart").removeValue();
-
                 itemCount.setText("Subtotal (" + 0 + " item)");
-                totalprice.setText(  0.0+"  EL");
-                totalprice_payment.setText(  0.0+"  EL");
+                totalprice.setText(  0.0+"  LE");
+                totalprice_payment.setText(  0.0+"  LE");
 
             }
         });

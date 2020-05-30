@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 import com.example.grocery.UI.activity.MainActivity;
 import com.example.grocery.R;
+import com.example.grocery.UI.activity.RecipientsActivity;
 import com.example.grocery.prevalent.Prevalent;
 import com.example.grocery.subactivity.ChangePassword;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -47,6 +48,7 @@ public class ProfileFragment extends Fragment {
 
     private DatabaseReference userReference;
     private TextView email_txv;
+    private TextView recipients_prof;
     private TextView name_txv;
     private TextView logout_prof;
     private TextView change_password;
@@ -65,7 +67,7 @@ public class ProfileFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         View view=  inflater.inflate(R.layout.fragment_profile, container, false);
-
+        recipients_prof=view.findViewById(R.id.recipients_prof);
         change_password=view.findViewById(R.id.change_password_prof);
         logout_prof=view.findViewById(R.id.logout_prof);
           email_txv= view.findViewById(R.id.email_txv);
@@ -162,6 +164,17 @@ public class ProfileFragment extends Fragment {
 
             }
         });
+
+
+        recipients_prof.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                startActivity(new Intent(getContext(), RecipientsActivity.class));
+
+            }
+        });
+
 
 
         return view;

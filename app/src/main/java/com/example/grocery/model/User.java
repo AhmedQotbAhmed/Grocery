@@ -2,15 +2,20 @@ package com.example.grocery.model;
 
 public class User {
 
-    private String fname,lname,email,password,mobile;
+    private String fname;
+    private String lname;
+    private String email;
+    private String password;
+    private String mobile;
+    private String address;
+    private String gander;
 
-    public User(String fname, String lname, String email, String password, String mobile) {
-        this.fname = fname;
-        this.lname = lname;
-        this.email = email;
-        this.password = password;
-        this.mobile = mobile;
-    }
+
+
+
+
+
+
     public User() {
 
     }
@@ -53,5 +58,31 @@ public class User {
 
     public String getMobile() {
         return mobile;
+    }
+    public String getAddress() {
+        return address;
+    }
+
+    public String getGander() {
+        return gander;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public void setGander(String gander) {
+        this.gander = gander;
+}
+
+    public User(String fname, String lname, String email, String password, String mobile, String address, String gander) {
+
+        this.fname = fname;
+        this.lname = lname;
+        this.email = email;
+        this.password = password;
+        this.mobile = mobile;
+        this.address = address;
+        this.gander = gander;
     }
 }
