@@ -22,6 +22,7 @@ import com.example.grocery.R;
 import com.example.grocery.model.User;
 import com.example.grocery.prevalent.Prevalent;
 import com.example.grocery.subactivity.ChangePassword;
+import com.example.grocery.subactivity.CheckoutActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
@@ -275,9 +276,9 @@ public class RecipientsActivity extends AppCompatActivity implements AdapterView
     public void onClick(View v) {
         if (v.getId()==R.id.Update_re)
         {
-            if (!url.isEmpty()&&!gander.isEmpty()) {
+            if (!gander.isEmpty()) {
                     Upload_user_data();
-                    startActivity(new Intent(RecipientsActivity.this,HomeActivity.class));
+                    startActivity(new Intent(RecipientsActivity.this, CheckoutActivity.class));
             }else{
 
             }
