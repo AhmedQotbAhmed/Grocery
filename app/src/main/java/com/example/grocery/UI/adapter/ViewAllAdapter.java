@@ -18,16 +18,16 @@ import com.example.grocery.R;
 import com.example.grocery.model.CartItem;
 import com.example.grocery.model.Products;
 import com.example.grocery.prevalent.Prevalent;
-import com.firebase.ui.database.FirebaseRecyclerAdapter;
-import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
 
+import java.util.HashMap;
 
-public class ViewAllAdapter extends FirebaseRecyclerAdapter<Products, ViewAllAdapter.ItemHolder> {
+
+public class ViewAllAdapter extends RecyclerView.Adapter<ViewAllAdapter.ItemHolder> {
     private  Context context;
 
     private DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
@@ -35,18 +35,11 @@ public class ViewAllAdapter extends FirebaseRecyclerAdapter<Products, ViewAllAda
     private CartItem cartItem;
     private  ItemHolder holder;
 
-    /**
-     * Initialize a {@link RecyclerView.Adapter} that listens to a Firebase query. See
-     * {@link FirebaseRecyclerOptions} for configuration options.
-     *
-     * @param options
-     */
-    public ViewAllAdapter(@NonNull FirebaseRecyclerOptions<Products> options) {
-        super(options);
+    HashMap<String,Products> list ;
 
+    public ViewAllAdapter(HashMap<String, Products> data) {
+        list=data;
     }
-
-
 
 
     @NonNull
@@ -59,18 +52,14 @@ public class ViewAllAdapter extends FirebaseRecyclerAdapter<Products, ViewAllAda
         return new ItemHolder(view);
     }
 
-
     @Override
-    protected void onBindViewHolder(@NonNull final ItemHolder holder, int position, @NonNull final Products model) {
-
-//        holder.constraintLayout.ser;
-//        holder.linearLayout;
+    public void onBindViewHolder(@NonNull ItemHolder holder, final int position) {
 
         this.holder = holder;
         holder.product_favourite_fa.setImageResource(R.drawable.ic_not__favorite);
-        holder.product_price.setText(model.getPrice_str() + " LE");
-        Picasso.get().load(model.getUri()).into(holder.product_Image);
-        holder.product_name.setText(model.getName_str());
+        holder.product_price.setText(list.get(position+"").getPrice_str() + " LE");
+        Picasso.get().load(list.get(position+"").getUri()).into(holder.product_Image);
+        holder.product_name.setText(list.get(position+"").getName_str());
         holder.linearLayout.setAnimation(AnimationUtils.loadAnimation(context, R.anim.content_transition_animation));
 
 
@@ -80,7 +69,7 @@ public class ViewAllAdapter extends FirebaseRecyclerAdapter<Products, ViewAllAda
             public void onClick(View v) {
                 ImageView  product_favourite_fa=v.findViewById(R.id.product_favourite_fa);
                 product_favourite_fa.setImageResource(R.drawable.ic_favorite);
-                Add_to_favourite_PostData( model);
+                Add_to_favourite_PostData( list.get(position+""));
             }
         });
 
@@ -89,13 +78,19 @@ public class ViewAllAdapter extends FirebaseRecyclerAdapter<Products, ViewAllAda
             @Override
             public void onClick(View v) {
 
-                Add_to_cart_PostData(model);
+                Add_to_cart_PostData(list.get(position+""));
 
             }
         });
-
-
     }
+
+    @Override
+    public int getItemCount() {
+        return list.size();
+    }
+
+
+
 
 
 
@@ -155,7 +150,7 @@ public class ViewAllAdapter extends FirebaseRecyclerAdapter<Products, ViewAllAda
         public class ItemHolder extends RecyclerView.ViewHolder {
 
 
-             ImageView product_favourite_it;
+
             ImageView product_Image;
             ImageView product_favourite_fa;
             TextView product_name;

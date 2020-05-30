@@ -1,32 +1,42 @@
 package com.example.grocery.UI.adapter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.grocery.R;
+import com.example.grocery.model.Category;
 import com.example.grocery.model.Products;
-import com.example.grocery.prevalent.Prevalent;
+import com.example.grocery.subactivity.ViewAll_Activity;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.squareup.picasso.Picasso;
 
-public class StoreAdapter extends FirebaseRecyclerAdapter<Products, StoreAdapter.ItemViewHolder>  {
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
+
+import static android.content.Context.MODE_PRIVATE;
+
+public class StoreAdapter extends FirebaseRecyclerAdapter<Category, StoreAdapter.ItemViewHolder> {
 
     private Context context;
-    private DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
+
+
+
+    private   List<Products> list= new ArrayList<>();
 
     /**
      * Initialize a {@link RecyclerView.Adapter} that listens to a Firebase query. See
@@ -34,7 +44,7 @@ public class StoreAdapter extends FirebaseRecyclerAdapter<Products, StoreAdapter
      *
      * @param options
      */
-    public StoreAdapter(@NonNull FirebaseRecyclerOptions<Products> options) {
+    public StoreAdapter(@NonNull FirebaseRecyclerOptions<Category> options) {
         super(options);
 
     }
@@ -44,109 +54,113 @@ public class StoreAdapter extends FirebaseRecyclerAdapter<Products, StoreAdapter
     public ItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
        context= parent.getContext();
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_store, parent, false);
+                .inflate(R.layout.item_category, parent, false);
         return new ItemViewHolder(view);
 
     }
 
     @Override
-    protected void onBindViewHolder(@NonNull final ItemViewHolder holder, int position, @NonNull final Products model) {
+    protected void onBindViewHolder(@NonNull final ItemViewHolder holder, int position, @NonNull final Category model) {
 
 
-//        Log.e("name",name);
-
-        holder.product_name.setText(model.getName_str() + "");
-        holder.product_price.setText(model.getPrice_str() + " LE");
 
 
-        Picasso.get().load(model.getUri()).into(holder.product_Image);
-        holder.product_favourite_it.setOnClickListener(new View.OnClickListener() {
+        holder.category_name.setText(" Grocery " + model.getCategory());
+        holder.category_recycler.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false));
+        holder.category_recycler.setAdapter(new CategoryAdapter(getData(model.getProducts_list())));
+
+
+        holder.viewAll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                holder.product_favourite_it.setImageResource(R.drawable.ic_favorite);
-                Add_to_favourite_PostData( model);
+
+                context.startActivity(new Intent(context, ViewAll_Activity.class).putExtra("products",getData(model.getProducts_list()) ));
+
+
             }
         });
 
-        holder.linearLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Add_to_cart_PostData(model);
-            }
-        });
 
     }
+
+    private HashMap<String, Products> getData(HashMap<String, Products> product) {
+
+        HashMap<String, Products> product_list = new HashMap<>();
+
+        int i = 0;
+
+        for (Products product_item : product.values()) {
+            if (!list.contains(product_item)){
+            list.add(product_item);
+            }
+            product_list.put(i + "", product_item);
+            i++;
+
+        }
+        return product_list;
+    }
+
+    public HashMap<String,Products>  getFilter(CharSequence constraint) {
+       int count=0;
+        HashMap<String, Products> list_p = new HashMap<>();
+        for (Products i:list){
+            list_p.put(count+"",i);
+            count++;
+        }
+        HashMap<String, Products> filteredList = new HashMap<>();
+        String charString = constraint.toString();
+
+        if (charString.isEmpty()) {
+        } else {
+             count = 0;
+//            Log.e("siz",list.size()+"");
+            for (Products product : list_p.values()) {
+
+                if (product.getName_str().toLowerCase().contains(charString.toLowerCase())) {
+
+                    filteredList.put(count + "", product);
+                    count++;
+
+                }
+            }
+            if (!filteredList.isEmpty()) {
+//                Log.e("sizdsfe",list_p.size()+"");
+                return filteredList;
+
+            }
+
+        }
+
+        return  filteredList;
+    }
+
+
+
+//
+
+
+
+
+
 
 
     class ItemViewHolder extends RecyclerView.ViewHolder {
 
 
-        ImageView product_Image;
-        ImageView product_favourite_it;
-        TextView product_name;
-        TextView product_price;
+        TextView viewAll;
+        TextView category_name;
+        RecyclerView category_recycler;
         LinearLayout linearLayout;
 
         ItemViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            product_favourite_it=itemView.findViewById(R.id.product_favourite_it);
-            linearLayout=itemView.findViewById(R.id.linearLayout_cart);
-            product_Image = itemView.findViewById(R.id.product_image_it);
-            product_name = itemView.findViewById(R.id.product_name_it);
-            product_price = itemView.findViewById(R.id.product_price_it);
-
+            viewAll = itemView.findViewById(R.id.viewAll_Vegetables2);
+            linearLayout = itemView.findViewById(R.id.item_category);
+            category_name = itemView.findViewById(R.id.Category_name);
+            category_recycler = itemView.findViewById(R.id.recycler_category);
         }
     }
-
-
-
-    private void Add_to_cart_PostData(Products product) {
-
-//      product    ,   price_str ,  itemCategory and uri this is our post data
-        final String email= Prevalent.userEmail;
-        reference.child("Users").child(email).child("Cart").child(product.getName_str())
-                .setValue(product)
-                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        if (task.isSuccessful()) {
-                            Toast.makeText(context, "Add to Cart", Toast.LENGTH_SHORT).show();
-
-
-                        } else {
-                            Toast.makeText(context, "Network Error: please try again...", Toast.LENGTH_LONG).show();
-
-
-                        }}
-
-                });
-
-
-    } private void Add_to_favourite_PostData(Products product) {
-
-
-//      product    ,   price_str ,  itemCategory and uri this is our post data
-        final String email= Prevalent.userEmail;
-        reference.child("Users").child(email).child("favourite").child(product.getName_str())
-                .setValue(product)
-                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        if (task.isSuccessful()) {
-                            Toast.makeText(context, "Add to favourite", Toast.LENGTH_SHORT).show();
-
-
-                        } else {
-                            Toast.makeText(context, "Network Error: please try again...", Toast.LENGTH_LONG).show();
-
-
-                        }
-                    }
-                });
-
-    }
-
 
 
 }

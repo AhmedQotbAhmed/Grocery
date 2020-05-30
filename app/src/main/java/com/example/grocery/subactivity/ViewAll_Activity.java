@@ -14,10 +14,12 @@ import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.HashMap;
+
 
 public class ViewAll_Activity extends AppCompatActivity {
     private RecyclerView recyclerView;
-    FirebaseRecyclerOptions<Products> options;
+    private HashMap<String, Products> list;
 
     private DatabaseReference postReference;
     @Override
@@ -26,20 +28,21 @@ public class ViewAll_Activity extends AppCompatActivity {
         setContentView(R.layout.fragment_favourite);
 
         // for see all
+        Intent intent= getIntent();
 
-Intent intent= getIntent();
-         String childName = intent.getStringExtra("ref");
-        postReference = FirebaseDatabase.getInstance().getReference().child("products").child( childName);
+        list= (HashMap<String, Products>) intent.getSerializableExtra("products");
+
         recyclerView=findViewById(R.id.recycler_Favourite);
         RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(getApplicationContext(), 2);
         recyclerView.setLayoutManager(mLayoutManager);
 
-        options = new FirebaseRecyclerOptions.Builder<Products>()
-                .setQuery(postReference, Products.class).build();
 
-        ViewAllAdapter adaptor_Fruit = new ViewAllAdapter(options);
-        recyclerView.setAdapter(adaptor_Fruit);
-        adaptor_Fruit.startListening();
+        ViewAllAdapter adaptor = new ViewAllAdapter(list);
+        recyclerView.setAdapter(adaptor);
+
+
+
+
         //end
 
     }
