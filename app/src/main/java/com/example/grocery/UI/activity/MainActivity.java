@@ -70,36 +70,36 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 AllowAccessToAccount( unm,pass);
 
             }
-        }
-        // doubleClick is
-        //"A android library lo handle double click on android Views components. You just need to call it on your view
-        // in  https://github.com/pedromassango/doubleClick imp "
-        signUp.setOnClickListener(this);
-        frg_btn.setOnClickListener(this);
-
-        signIn.setOnClickListener( new DoubleClick(new DoubleClickListener() {
-            @Override
-            public void onSingleClick(View view) {
-                signIn_Content.setVisibility(View.VISIBLE);
-                Toast.makeText(getApplicationContext(),"Double Click to SignIn ",Toast.LENGTH_SHORT).show();
             }
+            // doubleClick is
+            //"A android library lo handle double click on android Views components. You just need to call it on your view
+            // in  https://github.com/pedromassango/doubleClick imp "
+            signUp.setOnClickListener(this);
+            frg_btn.setOnClickListener(this);
 
-            @Override
-            public void onDoubleClick(View view) {
-                String email_Str = email_edt.getText().toString();
-                String password_Str = password_edt.getText().toString();
-                if (!email_Str.isEmpty()&&!password_Str.isEmpty()){
-                signIn_Content.setVisibility(View.INVISIBLE);
-                LoginUser();
-                }
-                else {
-                    email_edt.setError("Email is required");
-                    password_edt.setError("password is required");
-
+            signIn.setOnClickListener( new DoubleClick(new DoubleClickListener() {
+                @Override
+                public void onSingleClick(View view) {
+                    signIn_Content.setVisibility(View.VISIBLE);
+                    Toast.makeText(getApplicationContext(),"Double Click to SignIn ",Toast.LENGTH_SHORT).show();
                 }
 
-            }
-        })  );
+                @Override
+                public void onDoubleClick(View view) {
+                    String email_Str = email_edt.getText().toString();
+                    String password_Str = password_edt.getText().toString();
+                    if (!email_Str.isEmpty()&&!password_Str.isEmpty()){
+                    signIn_Content.setVisibility(View.INVISIBLE);
+                    LoginUser();
+                    }
+                    else {
+                        email_edt.setError("Email is required");
+                        password_edt.setError("password is required");
+
+                    }
+
+                }
+            })  );
 
 
 

@@ -17,13 +17,12 @@ import com.google.firebase.storage.StorageReference;
 public class FragmentAdapter extends FragmentPagerAdapter {
     private Context myContext;
     private int totalTabs;
-    private StorageReference mStorageRef;
 
     public FragmentAdapter(Context context, FragmentManager fragmentManager, int totalTabs) {
         super(fragmentManager, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
         this.myContext = context;
         this.totalTabs = totalTabs;
-        mStorageRef = FirebaseStorage.getInstance().getReference();
+
     }
 
 
