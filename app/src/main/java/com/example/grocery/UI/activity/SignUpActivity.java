@@ -27,7 +27,6 @@ import com.google.firebase.database.ValueEventListener;
 public class SignUpActivity extends AppCompatActivity implements View.OnClickListener {
     private EditText Fname ,Lname,email,password, rePassword,mobile_num;
     private Button SignUp;
-    private FirebaseDatabase database ;
     private ProgressDialog loadingBar;
     final DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
 
@@ -36,7 +35,6 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
         loadingBar=new ProgressDialog(this);
-        database = FirebaseDatabase.getInstance();
         Fname=findViewById(R.id.fname);
         Lname=findViewById(R.id.lname);
         email=findViewById(R.id.email_signUp);

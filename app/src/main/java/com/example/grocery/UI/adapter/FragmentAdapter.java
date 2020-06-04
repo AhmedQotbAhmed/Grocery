@@ -32,9 +32,9 @@ public class FragmentAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         switch (position) {
             case 0:
-
                 StoreFragment storeFragment = new StoreFragment();
                 return storeFragment;
+
             case 1:
 
                 CartFragment cartFragment = new CartFragment();
