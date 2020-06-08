@@ -6,12 +6,10 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
-import com.example.grocery.fragment.CartFragment;
-import com.example.grocery.fragment.FavouriteFragment;
-import com.example.grocery.fragment.ProfileFragment;
-import com.example.grocery.fragment.StoreFragment;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
+import com.example.grocery.UI.fragment.CartFragment;
+import com.example.grocery.UI.fragment.FavouriteFragment;
+import com.example.grocery.UI.fragment.ProfileFragment;
+import com.example.grocery.UI.fragment.StoreFragment;
 
 
 public class FragmentAdapter extends FragmentPagerAdapter {

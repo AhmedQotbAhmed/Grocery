@@ -7,7 +7,7 @@
     android:background="#52C0C0C0"
     android:orientation="vertical"
     android:id="@+id/L_checkout"
-    tools:context=".fragment.ProfileFragment">
+    tools:context=".UI.fragment.ProfileFragment">
 
 
 

@@ -1,10 +1,9 @@
-package com.example.grocery.fragment;
+package com.example.grocery.UI.fragment;
 
 
 import android.graphics.Color;
 import android.os.Bundle;
 
-import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;

@@ -1,4 +1,4 @@
-package com.example.grocery.fragment;
+package com.example.grocery.UI.fragment;
 
 
 import android.app.AlertDialog;

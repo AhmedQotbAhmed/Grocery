@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/FrameLayout"
-    tools:context=".fragment.FavouriteFragment"
+    tools:context=".UI.fragment.FavouriteFragment"
     android:paddingLeft="12dp"
     android:paddingTop="12dp"
     android:paddingRight="12dp"

@@ -1,9 +1,7 @@
-package com.example.grocery.fragment;
+package com.example.grocery.UI.fragment;
 
 
 import android.app.SearchManager;
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -12,7 +10,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.SearchView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -23,7 +20,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.grocery.R;
 import com.example.grocery.UI.adapter.ViewAllAdapter;
 import com.example.grocery.model.Category;
-import com.example.grocery.subactivity.ViewAll_Activity;
 import com.example.grocery.UI.adapter.StoreAdapter;
 import com.example.grocery.model.Products;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
@@ -33,7 +29,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.List;
 
 import static android.content.Context.SEARCH_SERVICE;
-import static androidx.core.content.ContextCompat.getSystemService;
 
 
 /**
