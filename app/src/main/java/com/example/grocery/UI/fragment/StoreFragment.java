@@ -18,9 +18,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.grocery.R;
+import com.example.grocery.UI.adapter.StoreAdapter;
 import com.example.grocery.UI.adapter.ViewAllAdapter;
 import com.example.grocery.model.Category;
-import com.example.grocery.UI.adapter.StoreAdapter;
 import com.example.grocery.model.Products;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DatabaseReference;
@@ -37,18 +37,15 @@ import static android.content.Context.SEARCH_SERVICE;
 public class StoreFragment extends Fragment {
 
 
-    private List<Products>list;
-
+    StoreAdapter adaptor;
+    private List<Products> list;
+    private DatabaseReference postReference;
+    private SearchView searchView;
+    private RecyclerView recyclerView;
 
     public StoreFragment() {
         // Required empty public constructor
     }
-
-
-    private DatabaseReference postReference;
-    private SearchView searchView;
-    private RecyclerView recyclerView;
-    StoreAdapter adaptor;
 
 //    private CartAdapter adaptor;
 
@@ -64,12 +61,11 @@ public class StoreFragment extends Fragment {
         postReference = FirebaseDatabase.getInstance().getReference().child("products");
 
 
-        recyclerView= view.findViewById(R.id.recycler_store_Fruit);
+        recyclerView = view.findViewById(R.id.recycler_store_Fruit);
 
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.VERTICAL,false));
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
 
         setHasOptionsMenu(true);
-
 
 
         return view;
@@ -82,10 +78,10 @@ public class StoreFragment extends Fragment {
 
         // GET THE Data from fireBase
 
-        FirebaseRecyclerOptions<Category>   options = new FirebaseRecyclerOptions.Builder<Category>()
+        FirebaseRecyclerOptions<Category> options = new FirebaseRecyclerOptions.Builder<Category>()
                 .setQuery(postReference, Category.class).build();
 
-         adaptor = new StoreAdapter(options);
+        adaptor = new StoreAdapter(options);
         recyclerView.setAdapter(adaptor);
         adaptor.startListening();
 
@@ -116,7 +112,6 @@ public class StoreFragment extends Fragment {
         searchView.setQueryHint("Search Product");
 
 
-
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -127,7 +122,7 @@ public class StoreFragment extends Fragment {
             public boolean onQueryTextChange(String newText) {
 
                 recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
-                ViewAllAdapter viewAllAdapter=new ViewAllAdapter( adaptor.getFilter(newText));
+                ViewAllAdapter viewAllAdapter = new ViewAllAdapter(adaptor.getFilter(newText));
                 recyclerView.setAdapter(viewAllAdapter);
                 return false;
             }
@@ -138,7 +133,7 @@ public class StoreFragment extends Fragment {
             @Override
             public boolean onClose() {
 
-                recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.VERTICAL,false));
+                recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
                 recyclerView.setAdapter(adaptor);
                 adaptor.startListening();
                 return false;
@@ -150,7 +145,7 @@ public class StoreFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.VERTICAL,false));
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
         recyclerView.setAdapter(adaptor);
         adaptor.startListening();
 
@@ -168,9 +163,6 @@ public class StoreFragment extends Fragment {
 
         return super.onOptionsItemSelected(item);
     }
-
-
-
 
 
 }

@@ -1,8 +1,6 @@
 package com.example.grocery.UI.adapter;
 
 import android.content.Context;
-import android.content.Intent;
-import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,8 +11,8 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.grocery.R;
-import com.example.grocery.model.CartItem;
 import com.example.grocery.model.Products;
 import com.example.grocery.prevalent.Prevalent;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -27,24 +25,21 @@ import java.util.HashMap;
 
 
 public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ItemHolder> {
-    private  Context context;
-
-
-    HashMap <String,Products> product;
-
+    HashMap<String, Products> product;
+    private Context context;
     private DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
 
     public CategoryAdapter(HashMap<String, Products> data) {
-        product =data;
+        product = data;
     }
 
     @NonNull
     @Override
     public ItemHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-    context=parent.getContext();
-    View view = LayoutInflater.from(parent.getContext())
-            .inflate(R.layout.item_store, parent, false);
+        context = parent.getContext();
+        View view = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.item_store, parent, false);
         return new ItemHolder(view);
 
 
@@ -62,7 +57,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ItemHo
             @Override
             public void onClick(View v) {
                 holder.product_favourite_it.setImageResource(R.drawable.ic_favorite);
-                Add_to_favourite_PostData( product.get(position + ""));
+                Add_to_favourite_PostData(product.get(position + ""));
             }
         });
 
@@ -74,17 +69,17 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ItemHo
         });
 
     }
+
     @Override
     public int getItemCount() {
         return product.size();
     }
 
 
-
     private void Add_to_cart_PostData(Products product) {
 
 //      product    ,   price_str ,  itemCategory and uri this is our post data
-        final String email= Prevalent.userEmail;
+        final String email = Prevalent.userEmail;
         reference.child("Users").child(email).child("Cart").child(product.getName_str())
                 .setValue(product)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -98,16 +93,19 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ItemHo
                             Toast.makeText(context, "Network Error: please try again...", Toast.LENGTH_LONG).show();
 
 
-                        }}
+                        }
+                    }
 
                 });
 
 
-    } private void Add_to_favourite_PostData(Products product) {
+    }
+
+    private void Add_to_favourite_PostData(Products product) {
 
 
 //      product    ,   price_str ,  itemCategory and uri this is our post data
-        final String email= Prevalent.userEmail;
+        final String email = Prevalent.userEmail;
         reference.child("Users").child(email).child("favourite").child(product.getName_str())
                 .setValue(product)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -128,22 +126,21 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ItemHo
     }
 
 
+    public class ItemHolder extends RecyclerView.ViewHolder {
+        ImageView product_Image;
+        ImageView product_favourite_it;
+        TextView product_name;
+        TextView product_price;
+        LinearLayout linearLayout;
 
-        public class ItemHolder extends RecyclerView.ViewHolder {
-            ImageView product_Image;
-            ImageView product_favourite_it;
-            TextView product_name;
-            TextView product_price;
-            LinearLayout linearLayout;
-
-            ItemHolder(@NonNull View itemView) {
-                super(itemView);
-                product_favourite_it=itemView.findViewById(R.id.product_favourite_it);
-                linearLayout=itemView.findViewById(R.id.linearLayout_cart);
-                product_Image = itemView.findViewById(R.id.product_image_it);
-                product_name = itemView.findViewById(R.id.product_name_it);
-                product_price = itemView.findViewById(R.id.product_price_it);
-            }
+        ItemHolder(@NonNull View itemView) {
+            super(itemView);
+            product_favourite_it = itemView.findViewById(R.id.product_favourite_it);
+            linearLayout = itemView.findViewById(R.id.linearLayout_cart);
+            product_Image = itemView.findViewById(R.id.product_image_it);
+            product_name = itemView.findViewById(R.id.product_name_it);
+            product_price = itemView.findViewById(R.id.product_price_it);
+        }
     }
 
 }

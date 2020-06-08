@@ -1,19 +1,13 @@
 package com.example.grocery.UI.activity;
 
+import android.os.Bundle;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
-import android.app.SearchManager;
-import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.widget.SearchView;
-
 import com.example.grocery.R;
 import com.example.grocery.UI.adapter.FragmentAdapter;
-
-
 import com.example.grocery.prevalent.Prevalent;
 import com.google.android.material.badge.BadgeDrawable;
 import com.google.android.material.tabs.TabLayout;
@@ -23,9 +17,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-public class HomeActivity extends AppCompatActivity  {
+public class HomeActivity extends AppCompatActivity {
+    long size = 0;
     private TabLayout tabLayout;
-
     private ViewPager viewPager;
 
     @Override
@@ -36,7 +30,7 @@ public class HomeActivity extends AppCompatActivity  {
 
         tabLayout = findViewById(R.id.tabLayout_home);
         viewPager = findViewById(R.id.viewPager_home);
-        tabLayout.setTabTextColors(getResources().getColor(R.color.colorPrimary),getResources().getColor(R.color.colorAccent));
+        tabLayout.setTabTextColors(getResources().getColor(R.color.colorPrimary), getResources().getColor(R.color.colorAccent));
 
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
@@ -69,19 +63,19 @@ public class HomeActivity extends AppCompatActivity  {
 
 
     }
-    long size=0;
+
     @Override
     protected void onStart() {
 
         super.onStart();
 
-         DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
-         String email= Prevalent.userEmail;
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
+        String email = Prevalent.userEmail;
         reference.child("Users").child(email).child("Cart").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                size= dataSnapshot.getChildrenCount();
-                change_cart_num( size);
+                size = dataSnapshot.getChildrenCount();
+                change_cart_num(size);
             }
 
             @Override
@@ -92,16 +86,13 @@ public class HomeActivity extends AppCompatActivity  {
 
 
     }
-    void change_cart_num(long size){
+
+    void change_cart_num(long size) {
 
         BadgeDrawable badge = tabLayout.getTabAt(1).getOrCreateBadge();
         badge.setVisible(true);
         badge.setNumber((int) size);
     }
-
-
-
-
 
 
 }

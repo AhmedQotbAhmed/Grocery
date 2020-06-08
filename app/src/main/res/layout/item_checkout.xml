@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/lin_checkout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#fafafa"
+    android:orientation="vertical"
+    android:layout_marginTop="60dp"
+>
+
+    <TextView
+        android:id="@+id/item_title"
+        android:layout_width="match_parent"
+        android:layout_height="68dp"
+        android:background="#fff"
+        android:drawableEnd="@drawable/ic_details_icon"
+        android:paddingLeft="10dp"
+        android:paddingTop="22dp"
+        android:paddingRight="10dp"
+        android:paddingBottom="25dp"
+        android:text="    Recipient details"
+        android:textColor="#C6000000"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        tools:src="@tools:sample/avatars[1]" />
+
+    <LinearLayout
+        android:paddingStart="16dp"
+        android:paddingLeft="16dp"
+        android:paddingEnd="16dp"
+        android:paddingBottom="16dp"
+        android:id="@+id/sub_item"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/sub_item_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            tools:text="temp" />
+
+        <TextView
+            android:id="@+id/sub_item_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            tools:text="temp" />
+    </LinearLayout>
+
+</LinearLayout>

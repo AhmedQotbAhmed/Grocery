@@ -7,29 +7,27 @@ public class Products implements Serializable {
     private String name_str;
     private String itemCategory;
     private String url = null;
-    private String total_price="0";
-    private String quantity="0";
+    private String total_price = "0";
+    private String quantity = "0";
 
 
-
-
-
-    public Products() { }
-
-    public void setTotal_price(String total_price) {
-        this.total_price = total_price;
-    }
-
-    public void setQuantity(String quantity) {
-        this.quantity = quantity;
+    public Products() {
     }
 
     public String getTotal_price() {
         return total_price;
     }
 
+    public void setTotal_price(String total_price) {
+        this.total_price = total_price;
+    }
+
     public String getQuantity() {
         return quantity;
+    }
+
+    public void setQuantity(String quantity) {
+        this.quantity = quantity;
     }
 
     public String getUri() {

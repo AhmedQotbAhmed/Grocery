@@ -21,7 +21,6 @@ public class ViewAll_Activity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private HashMap<String, Products> list;
 
-    private DatabaseReference postReference;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

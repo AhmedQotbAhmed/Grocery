@@ -28,12 +28,12 @@ import com.squareup.picasso.Picasso;
 
 
 public class FavouriteAdapter extends FirebaseRecyclerAdapter<Products, FavouriteAdapter.ItemHolder> {
-    private  Context context;
+    private Context context;
 
     private DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
 
     private CartItem cartItem;
-    private  ItemHolder holder;
+    private ItemHolder holder;
 
     /**
      * Initialize a {@link RecyclerView.Adapter} that listens to a Firebase query. See
@@ -47,15 +47,13 @@ public class FavouriteAdapter extends FirebaseRecyclerAdapter<Products, Favourit
     }
 
 
-
-
     @NonNull
     @Override
     public ItemHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        context=parent.getContext();
-       View view = LayoutInflater.from(parent.getContext())
-               .inflate(R.layout.item_favorite, parent, false);
-        cartItem=new CartItem();
+        context = parent.getContext();
+        View view = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.item_favorite, parent, false);
+        cartItem = new CartItem();
         return new ItemHolder(view);
     }
 
@@ -73,14 +71,12 @@ public class FavouriteAdapter extends FirebaseRecyclerAdapter<Products, Favourit
         holder.product_name.setText(model.getName_str());
 
 
-
-
         holder.product_favourite_fa.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ImageView  product_favourite_fa=v.findViewById(R.id.product_favourite_fa);
+                ImageView product_favourite_fa = v.findViewById(R.id.product_favourite_fa);
                 product_favourite_fa.setImageResource(R.drawable.ic_not__favorite);
-                delete_data( model.getName_str());
+                delete_data(model.getName_str());
             }
         });
 
@@ -99,14 +95,12 @@ public class FavouriteAdapter extends FirebaseRecyclerAdapter<Products, Favourit
 
 
     private void delete_data(String name) {
-        final String email= Prevalent.userEmail;
-        reference = FirebaseDatabase.getInstance().getReference().child("Users").child(email).child( "favourite");
+        final String email = Prevalent.userEmail;
+        reference = FirebaseDatabase.getInstance().getReference().child("Users").child(email).child("favourite");
         reference.child(name).removeValue();
 
 
-
     }
-
 
 
     private void Add_to_cart_PostData(Products product) {
@@ -136,23 +130,24 @@ public class FavouriteAdapter extends FirebaseRecyclerAdapter<Products, Favourit
 
     }
 
-        public class ItemHolder extends RecyclerView.ViewHolder {
+    public class ItemHolder extends RecyclerView.ViewHolder {
 
 
-            public ImageView product_favourite_it;
-            ImageView product_Image;
-            ImageView product_favourite_fa;
-            TextView product_name;
-            TextView product_price;
-            LinearLayout linearLayout;
+        public ImageView product_favourite_it;
+        ImageView product_Image;
+        ImageView product_favourite_fa;
+        TextView product_name;
+        TextView product_price;
+        LinearLayout linearLayout;
+
         public ItemHolder(@NonNull View itemView) {
             super(itemView);
-            product_favourite_fa=itemView.findViewById(R.id.product_favourite_fa);
-            linearLayout=itemView.findViewById(R.id.linearLayout_favorite);
+            product_favourite_fa = itemView.findViewById(R.id.product_favourite_fa);
+            linearLayout = itemView.findViewById(R.id.linearLayout_favorite);
             product_Image = itemView.findViewById(R.id.product_image_fa);
             product_name = itemView.findViewById(R.id.product_name_fa);
             product_price = itemView.findViewById(R.id.product_price_fa);
 
-          }
+        }
     }
 }

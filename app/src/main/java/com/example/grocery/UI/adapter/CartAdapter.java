@@ -2,7 +2,6 @@ package com.example.grocery.UI.adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,7 +13,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.grocery.R;
@@ -33,16 +31,14 @@ import java.util.HashMap;
 
 
 public class CartAdapter extends FirebaseRecyclerAdapter<Products, CartAdapter.ItemHolder> {
-    private  Context context;
-
     @SuppressLint("UseSparseArrays")
     HashMap<String, Products> total_price = new HashMap<>();
-
-    private DatabaseReference reference ;
+    private Context context;
+    private DatabaseReference reference;
 
     private CartItem cartItem;
 
-    private  ItemHolder holder;
+    private ItemHolder holder;
 
 
     /**
@@ -62,10 +58,10 @@ public class CartAdapter extends FirebaseRecyclerAdapter<Products, CartAdapter.I
     public ItemHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
 
-        context=parent.getContext();
-       View view = LayoutInflater.from(parent.getContext())
-               .inflate(R.layout.item_cart, parent, false);
-        cartItem=new CartItem();
+        context = parent.getContext();
+        View view = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.item_cart, parent, false);
+        cartItem = new CartItem();
         return new ItemHolder(view);
     }
 
@@ -83,9 +79,8 @@ public class CartAdapter extends FirebaseRecyclerAdapter<Products, CartAdapter.I
         Picasso.get().load(model.getUri()).into(holder.product_img);
         holder.product_name.setText(model.getName_str());
 
-        holder.quantity_txv.setText(model.getQuantity()+ " k");
-        holder.total_price.setText(model.getTotal_price()+" LE");
-
+        holder.quantity_txv.setText(model.getQuantity() + " k");
+        holder.total_price.setText(model.getTotal_price() + " LE");
 
 
 //        holder.quantity_txv.setText(quan);
@@ -98,7 +93,7 @@ public class CartAdapter extends FirebaseRecyclerAdapter<Products, CartAdapter.I
             public void onClick(View v) {
 
                 total_price.remove(holder.product_name.getText().toString());
-                delete_data( model.getName_str());
+                delete_data(model.getName_str());
 
 
             }
@@ -112,16 +107,15 @@ public class CartAdapter extends FirebaseRecyclerAdapter<Products, CartAdapter.I
                 cartItem.setPrice(price);
 
 
-                    quan = cartItem.pluseOprition(holder.quantity_txv.getText().toString());
-                    holder.quantity_txv.setText(quan+ " k");
-                    holder.total_price.setText(cartItem.getTotalPrice()+" LE");
+                quan = cartItem.pluseOprition(holder.quantity_txv.getText().toString());
+                holder.quantity_txv.setText(quan + " k");
+                holder.total_price.setText(cartItem.getTotalPrice() + " LE");
 
-                    model.setQuantity(quan );
-                    model.setTotal_price(cartItem.getTotalPrice());
+                model.setQuantity(quan);
+                model.setTotal_price(cartItem.getTotalPrice());
 
-                    total_price.put(holder.product_name.getText().toString(), model);
-                    Add_to_cart_PostData(model);
-
+                total_price.put(holder.product_name.getText().toString(), model);
+                Add_to_cart_PostData(model);
 
 
             }
@@ -134,15 +128,15 @@ public class CartAdapter extends FirebaseRecyclerAdapter<Products, CartAdapter.I
                 cartItem.setPrice(price);
 
 
-                    quan = cartItem.minusOprition(holder.quantity_txv.getText().toString());
-                    holder.quantity_txv.setText(quan+ " k");
-                    holder.total_price.setText(cartItem.getTotalPrice()+" LE");
+                quan = cartItem.minusOprition(holder.quantity_txv.getText().toString());
+                holder.quantity_txv.setText(quan + " k");
+                holder.total_price.setText(cartItem.getTotalPrice() + " LE");
 
                 model.setTotal_price(cartItem.getTotalPrice());
-                    model.setQuantity(quan);
+                model.setQuantity(quan);
 
-                    total_price.put(holder.product_name.getText().toString(), model);
-                    Add_to_cart_PostData(model);
+                total_price.put(holder.product_name.getText().toString(), model);
+                Add_to_cart_PostData(model);
 
             }
         });
@@ -151,13 +145,10 @@ public class CartAdapter extends FirebaseRecyclerAdapter<Products, CartAdapter.I
     }
 
 
-
-
-
     private void delete_data(String name) {
 
-        final String email= Prevalent.userEmail;
-        reference = FirebaseDatabase.getInstance().getReference().child("Users").child(email).child( "Cart");
+        final String email = Prevalent.userEmail;
+        reference = FirebaseDatabase.getInstance().getReference().child("Users").child(email).child("Cart");
         reference.child(name).removeValue();
 
 
@@ -169,13 +160,12 @@ public class CartAdapter extends FirebaseRecyclerAdapter<Products, CartAdapter.I
     }
 
 
-
     private void Add_to_cart_PostData(Products product) {
 
-        reference= FirebaseDatabase.getInstance().getReference();
+        reference = FirebaseDatabase.getInstance().getReference();
 //      product    ,   price_str ,  itemCategory and uri this is our post data
-        final String email= Prevalent.userEmail;
-        Log.e("email",email+"");
+        final String email = Prevalent.userEmail;
+        Log.e("email", email + "");
 
         reference.child("Users").child(email).child("Cart").child(product.getName_str())
                 .setValue(product)
@@ -195,7 +185,7 @@ public class CartAdapter extends FirebaseRecyclerAdapter<Products, CartAdapter.I
 
     public class ItemHolder extends RecyclerView.ViewHolder {
 
-//        ConstraintLayout constraintLayout;
+        //        ConstraintLayout constraintLayout;
         LinearLayout linearLayout;
 
         TextView price_Txv;
@@ -206,20 +196,21 @@ public class CartAdapter extends FirebaseRecyclerAdapter<Products, CartAdapter.I
         ImageView minus_btn;
         TextView quantity_txv;
         TextView chBx_Delete;
+
         public ItemHolder(@NonNull View itemView) {
             super(itemView);
 //    constraintLayout=itemView.findViewById(R.id.con_lay_it_c);
 
-    linearLayout=itemView.findViewById(R.id.linearLayout_it);
-    chBx_Delete = itemView.findViewById(R.id.delete_cart);
-    price_Txv=itemView.findViewById(R.id.price_it_c);
-    product_img=itemView.findViewById(R.id.product_image_it_c);
-    total_price=itemView.findViewById(R.id.total_price_it_c);
-    product_name=itemView.findViewById(R.id.name_it_c);
-    plus_btn=itemView.findViewById(R.id.plus_btn_it_c);
-    minus_btn=itemView.findViewById(R.id.minus_btn_it_c);
-    quantity_txv=itemView.findViewById(R.id.quantity_it_c);
+            linearLayout = itemView.findViewById(R.id.linearLayout_it);
+            chBx_Delete = itemView.findViewById(R.id.delete_cart);
+            price_Txv = itemView.findViewById(R.id.price_it_c);
+            product_img = itemView.findViewById(R.id.product_image_it_c);
+            total_price = itemView.findViewById(R.id.total_price_it_c);
+            product_name = itemView.findViewById(R.id.name_it_c);
+            plus_btn = itemView.findViewById(R.id.plus_btn_it_c);
+            minus_btn = itemView.findViewById(R.id.minus_btn_it_c);
+            quantity_txv = itemView.findViewById(R.id.quantity_it_c);
 
-          }
+        }
     }
 }

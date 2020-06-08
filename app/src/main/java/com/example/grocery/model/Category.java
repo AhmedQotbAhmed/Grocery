@@ -4,7 +4,7 @@ import java.util.HashMap;
 
 public class Category {
 
-    private  HashMap<String,Products> products_list=new HashMap<>();
+    private HashMap<String, Products> products_list = new HashMap<>();
     private String category;
 
 
@@ -12,22 +12,20 @@ public class Category {
         return products_list;
     }
 
-    public String getCategory() {
-        return category;
-    }
-
-
-    public void setProducts_ToList(String name, Products product) {
-        this.products_list.put(name,product);
-    }
-
-
     public void setProducts_list(HashMap<String, Products> products_list) {
         this.products_list = products_list;
     }
 
+    public String getCategory() {
+        return category;
+    }
+
     public void setCategory(String category) {
         this.category = category;
+    }
+
+    public void setProducts_ToList(String name, Products product) {
+        this.products_list.put(name, product);
     }
 
 

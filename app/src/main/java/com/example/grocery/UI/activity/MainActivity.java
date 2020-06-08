@@ -41,6 +41,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private SharedPreferences.Editor Ed;
     private DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
 
+    public static boolean isValid(String email) {
+        String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\." +
+                "[a-zA-Z0-9_+&*-]+)*@" +
+                "(?:[a-zA-Z0-9-]+\\.)+[a-z" +
+                "A-Z]{2,7}$";
+
+        Pattern pat = Pattern.compile(emailRegex);
+        if (email == null)
+            return false;
+        return pat.matcher(email).matches();
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -125,7 +137,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
-
     private void LoginUser() {
 
 
@@ -202,18 +213,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         });
         loadingBar.dismiss();
 
-    }
-
-    public static boolean isValid(String email) {
-        String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\." +
-                "[a-zA-Z0-9_+&*-]+)*@" +
-                "(?:[a-zA-Z0-9-]+\\.)+[a-z" +
-                "A-Z]{2,7}$";
-
-        Pattern pat = Pattern.compile(emailRegex);
-        if (email == null)
-            return false;
-        return pat.matcher(email).matches();
     }
 
     @Override

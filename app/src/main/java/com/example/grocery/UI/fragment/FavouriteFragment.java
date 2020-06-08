@@ -3,15 +3,14 @@ package com.example.grocery.UI.fragment;
 
 import android.graphics.Color;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.grocery.R;
 import com.example.grocery.UI.adapter.FavouriteAdapter;
@@ -40,27 +39,28 @@ public class FavouriteFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view=  inflater.inflate(R.layout.fragment_favourite, container, false);
-        final String email= Prevalent.userEmail;
-        linearhom=view.findViewById(R.id.FrameLayout);
+        View view = inflater.inflate(R.layout.fragment_favourite, container, false);
+        final String email = Prevalent.userEmail;
+        linearhom = view.findViewById(R.id.FrameLayout);
 
 
-        postReference = FirebaseDatabase.getInstance().getReference().child("Users").child(email).child( "favourite");
+        postReference = FirebaseDatabase.getInstance().getReference().child("Users").child(email).child("favourite");
         // Inflate the layout for this fragment
-        recyclerView=view.findViewById(R.id.recycler_Favourite);
+        recyclerView = view.findViewById(R.id.recycler_Favourite);
         RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(getContext(), 2);
         recyclerView.setLayoutManager(mLayoutManager);
 
         return view;
 
     }
+
     @Override
     public void onStart() {
         super.onStart();
         FirebaseRecyclerOptions<Products> options_Fruit = new FirebaseRecyclerOptions.Builder<Products>()
                 .setQuery(postReference, Products.class).build();
 
-         adaptor = new FavouriteAdapter(options_Fruit);
+        adaptor = new FavouriteAdapter(options_Fruit);
         recyclerView.setAdapter(adaptor);
         adaptor.startListening();
     }

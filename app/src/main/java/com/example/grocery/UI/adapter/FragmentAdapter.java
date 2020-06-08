@@ -24,7 +24,6 @@ public class FragmentAdapter extends FragmentPagerAdapter {
     }
 
 
-
     // this is for fragment tabs
     @Override
     public Fragment getItem(int position) {
@@ -55,11 +54,6 @@ public class FragmentAdapter extends FragmentPagerAdapter {
     public int getCount() {
         return totalTabs;
     }
-
-
-
-
-
 
 
 }

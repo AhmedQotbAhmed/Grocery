@@ -29,89 +29,15 @@
              />
     </LinearLayout>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recview"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
+        android:layout_height="348dp"
+        android:layout_marginLeft="10dp"
         android:layout_marginTop="10dp"
-        android:layout_marginEnd="5dp"
-        android:orientation="vertical">
+        android:layout_marginRight="10dp"
 
-        <TextView
-            android:id="@+id/recipients__checkout"
-            android:layout_width="match_parent"
-            android:layout_height="68dp"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginEnd="5dp"
-            android:background="#fff"
-            android:drawableStart="@drawable/ic_recipients_prof_icon"
-            android:drawableEnd="@drawable/ic_details_icon"
-            android:paddingLeft="10dp"
-            android:paddingTop="22dp"
-            android:paddingRight="10dp"
-            android:paddingBottom="25dp"
-            android:text="    Recipient details"
-            android:textColor="#C6000000"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:src="@tools:sample/avatars[1]" />
-
-        <TextView
-            android:id="@+id/delivery_address__checkout"
-            android:layout_width="match_parent"
-            android:layout_height="68dp"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginEnd="5dp"
-            android:background="#fff"
-            android:drawableStart="@drawable/ic_delivery_address"
-            android:drawableEnd="@drawable/ic_details_icon"
-            android:paddingLeft="10dp"
-            android:paddingTop="22dp"
-            android:paddingRight="10dp"
-            android:paddingBottom="25dp"
-            android:text="    Delivery or Pickup info"
-            android:textColor="#C6000000"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/recipients__checkout"
-            tools:src="@tools:sample/avatars" />
-
-        <TextView
-            android:id="@+id/payment_method__checkout"
-            android:layout_width="match_parent"
-            android:layout_height="68dp"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginEnd="5dp"
-            android:background="#fff"
-            android:drawableStart="@drawable/ic_pyment_icon"
-            android:drawableEnd="@drawable/ic_details_icon"
-            android:paddingLeft="10dp"
-            android:paddingTop="22dp"
-            android:paddingRight="10dp"
-            android:paddingBottom="25dp"
-            android:text="    Payment Method"
-            android:textColor="#C6000000"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/delivery_address__checkout"
-            tools:src="@tools:sample/avatars[2]" />
-
-
-
-
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        android:background="#fafafa" />
 
     <Button
         android:id="@+id/confirm_checkout"

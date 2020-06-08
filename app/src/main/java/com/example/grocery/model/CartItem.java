@@ -2,13 +2,10 @@ package com.example.grocery.model;
 
 import android.util.Log;
 
-import com.example.grocery.model.Products;
-
-
 import java.util.List;
 
 public class CartItem {
-    public  List<Products> list;
+    public List<Products> list;
     private double totalPrice;
     private double quantity;
     private double price;
@@ -17,27 +14,25 @@ public class CartItem {
     }
 
 
-
-    public  String pluseOprition(String quantity_str) {
+    public String pluseOprition(String quantity_str) {
         quantity = Double.valueOf(quantity_str.replace(" k", ""));
         quantity += 0.25;
-        totalPrice=price*quantity;
+        totalPrice = price * quantity;
         return quantity + "";
     }
 
     public String minusOprition(String quantity_str) {
-        if (Double.valueOf(quantity_str.replace(" k", ""))  > 0.25) {
-            quantity = Double.valueOf(quantity_str.replace(" k", "")) ;
-            Log.e("price",quantity+"");
+        if (Double.valueOf(quantity_str.replace(" k", "")) > 0.25) {
+            quantity = Double.valueOf(quantity_str.replace(" k", ""));
+            Log.e("price", quantity + "");
 
             quantity -= 0.25;
-            totalPrice=price*quantity;
+            totalPrice = price * quantity;
             return quantity + "";
-        }
-        else {
-            quantity = Double.valueOf(quantity_str.replace(" k", "")) ;
+        } else {
+            quantity = Double.valueOf(quantity_str.replace(" k", ""));
             quantity = 0.25;
-            totalPrice=price*quantity;
+            totalPrice = price * quantity;
             return quantity + "";
         }
 
@@ -46,7 +41,7 @@ public class CartItem {
 
     public String getTotalPrice() {
 
-        return totalPrice+"";
+        return totalPrice + "";
     }
 
     public double get_Total_Price() {

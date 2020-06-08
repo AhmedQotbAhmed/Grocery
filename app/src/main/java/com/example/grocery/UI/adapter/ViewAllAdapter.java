@@ -28,27 +28,24 @@ import java.util.HashMap;
 
 
 public class ViewAllAdapter extends RecyclerView.Adapter<ViewAllAdapter.ItemHolder> {
-    private  Context context;
-
+    HashMap<String, Products> list;
+    private Context context;
     private DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
-
     private CartItem cartItem;
-    private  ItemHolder holder;
-
-    HashMap<String,Products> list ;
+    private ItemHolder holder;
 
     public ViewAllAdapter(HashMap<String, Products> data) {
-        list=data;
+        list = data;
     }
 
 
     @NonNull
     @Override
     public ItemHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        context=parent.getContext();
-       View view = LayoutInflater.from(parent.getContext())
-               .inflate(R.layout.item_favorite, parent, false);
-        cartItem=new CartItem();
+        context = parent.getContext();
+        View view = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.item_favorite, parent, false);
+        cartItem = new CartItem();
         return new ItemHolder(view);
     }
 
@@ -57,19 +54,18 @@ public class ViewAllAdapter extends RecyclerView.Adapter<ViewAllAdapter.ItemHold
 
         this.holder = holder;
         holder.product_favourite_fa.setImageResource(R.drawable.ic_not__favorite);
-        holder.product_price.setText(list.get(position+"").getPrice_str() + " LE");
-        Picasso.get().load(list.get(position+"").getUri()).into(holder.product_Image);
-        holder.product_name.setText(list.get(position+"").getName_str());
+        holder.product_price.setText(list.get(position + "").getPrice_str() + " LE");
+        Picasso.get().load(list.get(position + "").getUri()).into(holder.product_Image);
+        holder.product_name.setText(list.get(position + "").getName_str());
         holder.linearLayout.setAnimation(AnimationUtils.loadAnimation(context, R.anim.content_transition_animation));
-
 
 
         holder.product_favourite_fa.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ImageView  product_favourite_fa=v.findViewById(R.id.product_favourite_fa);
+                ImageView product_favourite_fa = v.findViewById(R.id.product_favourite_fa);
                 product_favourite_fa.setImageResource(R.drawable.ic_favorite);
-                Add_to_favourite_PostData( list.get(position+""));
+                Add_to_favourite_PostData(list.get(position + ""));
             }
         });
 
@@ -78,7 +74,7 @@ public class ViewAllAdapter extends RecyclerView.Adapter<ViewAllAdapter.ItemHold
             @Override
             public void onClick(View v) {
 
-                Add_to_cart_PostData(list.get(position+""));
+                Add_to_cart_PostData(list.get(position + ""));
 
             }
         });
@@ -90,17 +86,11 @@ public class ViewAllAdapter extends RecyclerView.Adapter<ViewAllAdapter.ItemHold
     }
 
 
-
-
-
-
-
-
     private void Add_to_favourite_PostData(Products product) {
 
 
 //      product    ,   price_str ,  itemCategory and uri this is our post data
-        final String email= Prevalent.userEmail;
+        final String email = Prevalent.userEmail;
         reference.child("Users").child(email).child("favourite").child(product.getName_str())
                 .setValue(product)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -147,24 +137,24 @@ public class ViewAllAdapter extends RecyclerView.Adapter<ViewAllAdapter.ItemHold
 
     }
 
-        public class ItemHolder extends RecyclerView.ViewHolder {
+    public class ItemHolder extends RecyclerView.ViewHolder {
 
 
+        ImageView product_Image;
+        ImageView product_favourite_fa;
+        TextView product_name;
+        TextView product_price;
+        LinearLayout linearLayout;
 
-            ImageView product_Image;
-            ImageView product_favourite_fa;
-            TextView product_name;
-            TextView product_price;
-            LinearLayout linearLayout;
         public ItemHolder(@NonNull View itemView) {
             super(itemView);
-            product_favourite_fa=itemView.findViewById(R.id.product_favourite_fa);
-            linearLayout=itemView.findViewById(R.id.linearLayout_favorite);
+            product_favourite_fa = itemView.findViewById(R.id.product_favourite_fa);
+            linearLayout = itemView.findViewById(R.id.linearLayout_favorite);
             product_Image = itemView.findViewById(R.id.product_image_fa);
             product_name = itemView.findViewById(R.id.product_name_fa);
             product_price = itemView.findViewById(R.id.product_price_fa);
 
-          }
+        }
     }
 
 }

@@ -2,8 +2,6 @@ package com.example.grocery.UI.adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,23 +18,17 @@ import com.example.grocery.model.Products;
 import com.example.grocery.subactivity.ViewAll_Activity;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
-
-import static android.content.Context.MODE_PRIVATE;
 
 public class StoreAdapter extends FirebaseRecyclerAdapter<Category, StoreAdapter.ItemViewHolder> {
 
     private Context context;
 
 
-
-    private   List<Products> list= new ArrayList<>();
+    private List<Products> list = new ArrayList<>();
 
     /**
      * Initialize a {@link RecyclerView.Adapter} that listens to a Firebase query. See
@@ -52,7 +44,7 @@ public class StoreAdapter extends FirebaseRecyclerAdapter<Category, StoreAdapter
     @NonNull
     @Override
     public ItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-       context= parent.getContext();
+        context = parent.getContext();
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_category, parent, false);
         return new ItemViewHolder(view);
@@ -61,8 +53,6 @@ public class StoreAdapter extends FirebaseRecyclerAdapter<Category, StoreAdapter
 
     @Override
     protected void onBindViewHolder(@NonNull final ItemViewHolder holder, int position, @NonNull final Category model) {
-
-
 
 
         holder.category_name.setText(" Grocery " + model.getCategory());
@@ -74,7 +64,7 @@ public class StoreAdapter extends FirebaseRecyclerAdapter<Category, StoreAdapter
             @Override
             public void onClick(View v) {
 
-                context.startActivity(new Intent(context, ViewAll_Activity.class).putExtra("products",getData(model.getProducts_list()) ));
+                context.startActivity(new Intent(context, ViewAll_Activity.class).putExtra("products", getData(model.getProducts_list())));
 
 
             }
@@ -90,8 +80,8 @@ public class StoreAdapter extends FirebaseRecyclerAdapter<Category, StoreAdapter
         int i = 0;
 
         for (Products product_item : product.values()) {
-            if (!list.contains(product_item)){
-            list.add(product_item);
+            if (!list.contains(product_item)) {
+                list.add(product_item);
             }
             product_list.put(i + "", product_item);
             i++;
@@ -100,11 +90,11 @@ public class StoreAdapter extends FirebaseRecyclerAdapter<Category, StoreAdapter
         return product_list;
     }
 
-    public HashMap<String,Products>  getFilter(CharSequence constraint) {
-       int count=0;
+    public HashMap<String, Products> getFilter(CharSequence constraint) {
+        int count = 0;
         HashMap<String, Products> list_p = new HashMap<>();
-        for (Products i:list){
-            list_p.put(count+"",i);
+        for (Products i : list) {
+            list_p.put(count + "", i);
             count++;
         }
         HashMap<String, Products> filteredList = new HashMap<>();
@@ -112,7 +102,7 @@ public class StoreAdapter extends FirebaseRecyclerAdapter<Category, StoreAdapter
 
         if (charString.isEmpty()) {
         } else {
-             count = 0;
+            count = 0;
 //            Log.e("siz",list.size()+"");
             for (Products product : list_p.values()) {
 
@@ -131,17 +121,11 @@ public class StoreAdapter extends FirebaseRecyclerAdapter<Category, StoreAdapter
 
         }
 
-        return  filteredList;
+        return filteredList;
     }
 
 
-
 //
-
-
-
-
-
 
 
     class ItemViewHolder extends RecyclerView.ViewHolder {

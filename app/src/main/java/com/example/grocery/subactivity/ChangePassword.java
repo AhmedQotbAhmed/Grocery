@@ -14,7 +14,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.grocery.R;
 import com.example.grocery.UI.activity.HomeActivity;
-import com.example.grocery.UI.fragment.ProfileFragment;
 import com.example.grocery.prevalent.Prevalent;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -32,6 +31,7 @@ public class ChangePassword extends AppCompatActivity implements View.OnClickLis
     private String new_ps;
     private String new_confirm_ps;
     private String curr_ps;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,18 +72,16 @@ public class ChangePassword extends AppCompatActivity implements View.OnClickLis
 
                     new_ps_txv.setError(" New password can't be an old one.");
 
-                }
-                else {
+                } else {
                     if (new_confirm_ps.equals(new_ps)) {
 
                         Reference.setValue(new_ps);
                         Toast.makeText(this, "Password change Successfully", Toast.LENGTH_LONG).show();
                         SharedPreferences sp;
 
-                        sp=getSharedPreferences("userLogin", MODE_PRIVATE);
-                        sp.edit().putString("Psw",new_ps);
+                        sp = getSharedPreferences("userLogin", MODE_PRIVATE);
+                        sp.edit().putString("Psw", new_ps);
                         startActivity(new Intent(this, HomeActivity.class));
-
 
 
                     } else {

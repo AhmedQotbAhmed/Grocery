@@ -21,11 +21,11 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.grocery.subactivity.CheckoutActivity;
 import com.example.grocery.R;
 import com.example.grocery.UI.adapter.CartAdapter;
 import com.example.grocery.model.Products;
 import com.example.grocery.prevalent.Prevalent;
+import com.example.grocery.subactivity.CheckoutActivity;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -40,41 +40,42 @@ import java.util.HashMap;
  * A simple {@link Fragment} subclass.
  */
 public class CartFragment extends Fragment {
-        private HashMap<String,Products> list;
-        private DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
+    private HashMap<String, Products> list;
+    private DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
 
-        private CartAdapter adaptor;
-        private RecyclerView recyclerView;
-        private ConstraintLayout cart_summary;
-        private BottomSheetBehavior bottomSheetBehavior;
-        private TextView itemCount ;
-        private TextView totalprice ;
-        private TextView totalprice_payment ;
-        private Button paynow;
-        private Button cancel;
+    private CartAdapter adaptor;
+    private RecyclerView recyclerView;
+    private ConstraintLayout cart_summary;
+    private BottomSheetBehavior bottomSheetBehavior;
+    private TextView itemCount;
+    private TextView totalprice;
+    private TextView totalprice_payment;
+    private Button paynow;
+    private Button cancel;
 
 
-        private DatabaseReference postReference;
+    private DatabaseReference postReference;
+
     public CartFragment() {
         // Required empty public constructor
     }
 
     private double total_price = 0;
-    private int size=0;
-    CoordinatorLayout linearhom;
+    private int size = 0;
+    private CoordinatorLayout linearhom;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view=  inflater.inflate(R.layout.fragment_cart, container, false);
-        final String email= Prevalent.userEmail;
+        View view = inflater.inflate(R.layout.fragment_cart, container, false);
+        final String email = Prevalent.userEmail;
 
 
-        linearhom=view.findViewById(R.id.home_linear);
-        postReference = FirebaseDatabase.getInstance().getReference().child("Users").child(email).child( "Cart");
+        linearhom = view.findViewById(R.id.home_linear);
+        postReference = FirebaseDatabase.getInstance().getReference().child("Users").child(email).child("Cart");
         // Inflate the layout for this fragment
-        recyclerView=view.findViewById(R.id.recycler_cart);
+        recyclerView = view.findViewById(R.id.recycler_cart);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-
 
 
         return view;
@@ -84,18 +85,19 @@ public class CartFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        cart_summary=view.findViewById(R.id.cart_summary);
-        bottomSheetBehavior= BottomSheetBehavior.from(cart_summary);
+        cart_summary = view.findViewById(R.id.cart_summary);
+        bottomSheetBehavior = BottomSheetBehavior.from(cart_summary);
 
-        paynow=view.findViewById(R.id.paynow_btn);
-        cancel=view.findViewById(R.id.cancel_btn);
+        paynow = view.findViewById(R.id.paynow_btn);
+        cancel = view.findViewById(R.id.cancel_btn);
         bottomSheetBehavior.addBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
             @Override
             public void onStateChanged(@NonNull View bottomSheet, int newState) {
-                if (newState==BottomSheetBehavior.STATE_HIDDEN)
-                { bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+                if (newState == BottomSheetBehavior.STATE_HIDDEN) {
+                    bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
 
-                    set_cart_summary();}
+                    set_cart_summary();
+                }
             }
 
             @Override
@@ -103,20 +105,21 @@ public class CartFragment extends Fragment {
                 set_cart_summary();
 
 
-            }});
+            }
+        });
 
 
-        itemCount =view.findViewById(R.id.subtotal_item);
-        totalprice =view.findViewById(R.id.subtotal_price_p);
-        totalprice_payment =view.findViewById(R.id.total_price_payment_p);
+        itemCount = view.findViewById(R.id.subtotal_item);
+        totalprice = view.findViewById(R.id.subtotal_price_p);
+        totalprice_payment = view.findViewById(R.id.total_price_payment_p);
 
         paynow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!totalprice_payment.getText().toString().equals(+ 0.0+"  LE" ))
-                {  upload_Invoices ();
+                if (!totalprice_payment.getText().toString().equals(+0.0 + "  LE")) {
+                    upload_Invoices();
 
-                startActivity(new Intent(getContext(), CheckoutActivity.class).putExtra("inv",list));
+                    startActivity(new Intent(getContext(), CheckoutActivity.class).putExtra("inv", list));
                 }
             }
         });
@@ -126,15 +129,15 @@ public class CartFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                if (!(list ==null) &&!list.isEmpty())
-                list.clear();
+                if (!(list == null) && !list.isEmpty())
+                    list.clear();
 
-                final String email= Prevalent.userEmail;
-                reference.child("Users").child(email).child("invoices").child(((int)total_price)+"-"+size+"-"+((int)(total_price - 10 + 30))).removeValue();
-                reference.child("Users").child(email).child( "Cart").removeValue();
+                final String email = Prevalent.userEmail;
+                reference.child("Users").child(email).child("invoices").child(((int) total_price) + "-" + size + "-" + ((int) (total_price - 10 + 30))).removeValue();
+                reference.child("Users").child(email).child("Cart").removeValue();
                 itemCount.setText("Subtotal (" + 0 + " item)");
-                totalprice.setText(  0.0+"  LE");
-                totalprice_payment.setText(  0.0+"  LE");
+                totalprice.setText(0.0 + "  LE");
+                totalprice_payment.setText(0.0 + "  LE");
 
             }
         });
@@ -143,29 +146,30 @@ public class CartFragment extends Fragment {
 
     @SuppressLint("SetTextI18n")
     private void set_cart_summary() {
-        
+
         if (!adaptor.getTotal_price().isEmpty()) {
-             total_price = 0;
-             size=0;
+            total_price = 0;
+            size = 0;
             list = adaptor.getTotal_price();
             for (Products i : list.values()) {
 
-                total_price +=Double.valueOf( i.getTotal_price().replace(" LE",""));
-                    size++;
+                total_price += Double.valueOf(i.getTotal_price().replace(" LE", ""));
+                size++;
 
             }
 
             itemCount.setText("Subtotal (" + size + " item)");
-            totalprice.setText( total_price+"  LE" );
-            totalprice_payment.setText((total_price - 10 + 30)+"  LE"  );
+            totalprice.setText(total_price + "  LE");
+            totalprice_payment.setText((total_price - 10 + 30) + "  LE");
 
         }
     }
-    void upload_Invoices (){
-        final String email= Prevalent.userEmail;
-        Log.e("email",email+"");
 
-        reference.child("Users").child(email).child("invoices").child(((int)total_price)+"-"+size+"-"+((int)(total_price - 10 + 30)))
+    void upload_Invoices() {
+        final String email = Prevalent.userEmail;
+        Log.e("email", email + "");
+
+        reference.child("Users").child(email).child("invoices").child(((int) total_price) + "-" + size + "-" + ((int) (total_price - 10 + 30)))
                 .setValue(list)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
@@ -183,7 +187,6 @@ public class CartFragment extends Fragment {
                 });
 
 
-
     }
 
     @Override
@@ -198,6 +201,7 @@ public class CartFragment extends Fragment {
         recyclerView.setAdapter(adaptor);
 
         adaptor.startListening();
+
 
     }
 
