@@ -23,6 +23,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import static com.example.grocery.UI.activity.MainActivity.isValid;
+
 
 public class SignUpActivity extends AppCompatActivity implements View.OnClickListener {
     private EditText Fname ,Lname,email,password, rePassword,mobile_num;
@@ -62,68 +64,70 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     private void CreateAccount() {
         String Fname_Str = Fname.getText().toString();
         String Lname_Str = Lname.getText().toString();
-        String email_Str = email.getText().toString();
+        String email_Str = email.getText().toString().toLowerCase();
         String password_Str = password.getText().toString();
         String rePassword_Str = rePassword.getText().toString();
         String mobile_Str = mobile_num.getText().toString();
 
-        if (password_Str.length() < 8) {
-            password.setError(" Minimum length of Password is should be 8 ");
-            password.requestFocus();
+        if (isValid(email_Str)) {
+
+            if (password_Str.length() < 8) {
+                password.setError(" Minimum length of Password is should be 8 ");
+                password.requestFocus();
+
+            } else if (email_Str.isEmpty()) {
+                email.setError("Email is required");
+                email.requestFocus();
+
+            } else if (password_Str.isEmpty() || rePassword_Str.isEmpty()) {
+                password.setError("Password is required");
+                rePassword.setError("Password is required");
+                password.requestFocus();
+
+            } else if (!password_Str.equals(rePassword_Str)) {
+                rePassword.setError("Password doesn't match");
+                password.setError("Password doesn't match");
+                rePassword.requestFocus();
+
+            } else if (Lname_Str.isEmpty()) {
+                Lname.setError("Lname is required");
+                Lname.requestFocus();
+
+            } else if (Fname_Str.isEmpty()) {
+                Fname.setError("Fname is required");
+                Fname.requestFocus();
+
+            } else if (mobile_Str.isEmpty()) {
+                mobile_num.setError("mobile is required");
+                mobile_num.requestFocus();
+
+            } else if (!Patterns.EMAIL_ADDRESS.matcher(email_Str).matches()) {
+                email.setError(" please Enter a valid email");
+                email.requestFocus();
+
+            } else {
+
+                loadingBar.setTitle("Create Account");
+                loadingBar.setMessage("Please wait, while we are checking the credentials");
+                loadingBar.setCanceledOnTouchOutside(false);
+                loadingBar.show();
+                validationEmail(Fname_Str, Lname_Str, email_Str, password_Str, mobile_Str);
+            }
+
 
         }
-        else if (email_Str.isEmpty()) {
-            email.setError("Email is required");
-            email.requestFocus();
-
-        }
-        else  if (password_Str.isEmpty() || rePassword_Str.isEmpty()) {
-            password.setError("Password is required");
-            rePassword.setError("Password is required");
-            password.requestFocus();
-
-        }
-        else if (!password_Str.equals(rePassword_Str)) {
-            rePassword.setError("Password doesn't match");
-            password.setError("Password doesn't match");
-            rePassword.requestFocus();
-
-        }
-        else if (Lname_Str.isEmpty()) {
-            Lname.setError("Lname is required");
-            Lname.requestFocus();
-
-        }
-        else if (Fname_Str.isEmpty()) {
-            Fname.setError("Fname is required");
-            Fname.requestFocus();
-
-        }
-        else  if (mobile_Str.isEmpty()) {
-            mobile_num.setError("mobile is required");
-            mobile_num.requestFocus();
-
-        }
-        else    if (!Patterns.EMAIL_ADDRESS.matcher(email_Str).matches()) {
-            email.setError(" please Enter a valid email");
-            email.requestFocus();
-
-             }
-
         else {
 
-            loadingBar.setTitle("Create Account");
-            loadingBar.setMessage("Please wait, while we are checking the credentials");
-            loadingBar.setCanceledOnTouchOutside(false);
-            loadingBar.show();
-            validationEmail(Fname_Str,Lname_Str,email_Str,password_Str,mobile_Str);
+
+                email.setError("Email is not valid");
+
+
+
         }
-
-
-
 
 
     }
+
 
     //validation the Email to crate a new one
     private void validationEmail(final String fname_str, final String lname_str, final String email_str, final String password_str, final String mobile_str) {
