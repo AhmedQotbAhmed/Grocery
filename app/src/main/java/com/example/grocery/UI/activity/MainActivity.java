@@ -71,7 +71,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 loadingBar.setMessage("Please wait, while we are checking the credentials");
                 loadingBar.setCanceledOnTouchOutside(false);
                 loadingBar.show();
+
                 AllowAccessToAccount(unm, pass);
+
 
             }
         }
@@ -91,23 +93,31 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onDoubleClick(View view) {
 
+
                 String email_Str = email_edt.getText().toString();
                 String password_Str = password_edt.getText().toString();
                 if (!email_Str.isEmpty() && !password_Str.isEmpty()) {
+
                     if (isValid(email_Str)) {
-                        signIn_Content.setVisibility(View.INVISIBLE);
+                        loadingBar.setTitle("Login Account");
+                        loadingBar.setMessage("Please wait, while we are checking the credentials");
+                        loadingBar.setCanceledOnTouchOutside(false);
+                        loadingBar.show();
+
                         LoginUser();
                     } else {
-
+                        loadingBar.dismiss();
                         email_edt.setError("Email is not valid");
 
 
                     }
                 } else {
+                    loadingBar.dismiss();
                     email_edt.setError("Email is required");
                     password_edt.setError("password is required");
 
                 }
+                signIn_Content.setVisibility(View.VISIBLE);
 
             }
         }));
@@ -118,6 +128,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void LoginUser() {
 
+
         String email_Str = email_edt.getText().toString().toLowerCase();
         String password_Str = password_edt.getText().toString();
 
@@ -127,30 +138,27 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             if (password_Str.length() < 8) {
                 password_edt.setError(" Minimum length of Password is should be 8 ");
                 password_edt.requestFocus();
+
             } else if (email_Str.isEmpty()) {
                 email_edt.setError("Email is required");
                 email_edt.requestFocus();
 
             } else {
 
-                loadingBar.setTitle("Login Account");
-                loadingBar.setMessage("Please wait, while we are checking the credentials");
-                loadingBar.setCanceledOnTouchOutside(false);
-                loadingBar.show();
+
                 AllowAccessToAccount(email_Str, password_Str);
             }
         } else {
             email_edt.setError("Email is required");
             password_edt.setError("password is required");
         }
+        loadingBar.dismiss();
     }
 
     private void AllowAccessToAccount(final String email_str, final String password_str) {
+
         if (chBx_rememberMe.isChecked()) {
-            loadingBar.setTitle("Login Account");
-            loadingBar.setMessage("Please wait, while we are checking the credentials");
-            loadingBar.setCanceledOnTouchOutside(false);
-            loadingBar.show();
+
             Ed.putString("Unm", email_str);
             Ed.putString("Psw", password_str);
             Ed.commit();
@@ -170,8 +178,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             Prevalent.currentOnlineUser = userData;
                             Prevalent.userEmail = email;
                             startActivity(new Intent(MainActivity.this, HomeActivity.class));
+
                         } else {
-                            loadingBar.dismiss();
+
                             password_edt.setError("password is incorrect");
                         }
 
@@ -179,10 +188,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
                 } else if (email_edt.getText().toString().isEmpty()) {
-                    loadingBar.dismiss();
 
                 } else {
-                    loadingBar.dismiss();
+
                     email_edt.setError("Email do not exists");
                 }
             }
@@ -192,6 +200,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Log.e(" logIn onCancelled", databaseError.toString());
             }
         });
+        loadingBar.dismiss();
 
     }
 
