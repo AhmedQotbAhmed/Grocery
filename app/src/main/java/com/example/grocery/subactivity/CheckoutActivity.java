@@ -68,7 +68,7 @@ public class CheckoutActivity extends AppCompatActivity {
                 address=dataSnapshot.child("address").getValue().toString()+"";
                 movieList.add(new Checkout("Recipient details","Name:   "+fname+lname ,"Email:   " +email_string,R.drawable.ic_recipients_prof_icon));
                 movieList.add(new Checkout("Delivery or Pickup info", "address:   "+address,"mobile:   " +mobile,R.drawable.ic_delivery_address));
-                movieList.add(new Checkout("Payment Method", "Payment card number **************:   ","" +mobile,R.drawable.ic_pyment_icon));
+                movieList.add(new Checkout("Payment Method", "Payment card number **************:   ","" ,R.drawable.ic_pyment_icon));
                 CheckoutAdapter adapter = new CheckoutAdapter(movieList);
 
                 RecyclerView recyclerView = findViewById(R.id.recview);
