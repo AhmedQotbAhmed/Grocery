@@ -19,7 +19,7 @@
         <activity android:name=".UI.activity.HomeActivity" />
         <activity android:name=".subactivity.CheckoutActivity" />
         <activity android:name=".UI.activity.SignUpActivity" />
-        <activity android:name=".UI.activity.MainActivity">
+        <activity android:name=".UI.activity.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

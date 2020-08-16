@@ -30,7 +30,7 @@ import com.pedromassango.doubleclick.DoubleClickListener;
 
 import java.util.regex.Pattern;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
     private LinearLayout signIn_Content;
     private EditText email_edt;
@@ -66,7 +66,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         password_edt = findViewById(R.id.pass_signIn);
         Button signIn = findViewById(R.id.sign_in_btn);
         Button signUp = findViewById(R.id.sign_up_btn);
-        TextView frg_btn = findViewById(R.id.forgotPass_btn);
         signIn_Content = findViewById(R.id.sign_in_content);
         loadingBar = new ProgressDialog(this);
         chBx_rememberMe = findViewById(R.id.chBx_RememberMe);
@@ -93,47 +92,48 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //"A android library lo handle double click on android Views components. You just need to call it on your view
         // in  https://github.com/pedromassango/doubleClick imp "
         signUp.setOnClickListener(this);
-        frg_btn.setOnClickListener(this);
+        signIn.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View v) {
+        String email_Str = email_edt.getText().toString();
+        String password_Str = password_edt.getText().toString();
+        if (!email_Str.isEmpty() && !password_Str.isEmpty()) {
 
-        signIn.setOnClickListener(new DoubleClick(new DoubleClickListener() {
-            @Override
-            public void onSingleClick(View view) {
-                signIn_Content.setVisibility(View.VISIBLE);
-                Toast.makeText(getApplicationContext(), "Double Click to SignIn ", Toast.LENGTH_SHORT).show();
-            }
+            if (isValid(email_Str)) {
+                loadingBar.setTitle("Login Account");
+                loadingBar.setMessage("Please wait, while we are checking the credentials");
+                loadingBar.setCanceledOnTouchOutside(false);
+                loadingBar.show();
 
-            @Override
-            public void onDoubleClick(View view) {
+                LoginUser();
+            } else {
+                loadingBar.dismiss();
+                email_edt.setError("Email is not valid");
 
-
-                String email_Str = email_edt.getText().toString();
-                String password_Str = password_edt.getText().toString();
-                if (!email_Str.isEmpty() && !password_Str.isEmpty()) {
-
-                    if (isValid(email_Str)) {
-                        loadingBar.setTitle("Login Account");
-                        loadingBar.setMessage("Please wait, while we are checking the credentials");
-                        loadingBar.setCanceledOnTouchOutside(false);
-                        loadingBar.show();
-
-                        LoginUser();
-                    } else {
-                        loadingBar.dismiss();
-                        email_edt.setError("Email is not valid");
-
-
-                    }
-                } else {
-                    loadingBar.dismiss();
-                    email_edt.setError("Email is required");
-                    password_edt.setError("password is required");
-
-                }
-                signIn_Content.setVisibility(View.VISIBLE);
 
             }
-        }));
+        } else {
+            loadingBar.dismiss();
+            email_edt.setError("Email is required");
+            password_edt.setError("password is required");
 
+        }
+    }
+});
+
+
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        email_edt = findViewById(R.id.email_signIn);
+        password_edt = findViewById(R.id.pass_signIn);
+        Button signIn = findViewById(R.id.sign_in_btn);
+        Button signUp = findViewById(R.id.sign_up_btn);
+        signIn_Content = findViewById(R.id.sign_in_content);
+        loadingBar = new ProgressDialog(this);
+        chBx_rememberMe = findViewById(R.id.chBx_RememberMe);
 
     }
 
@@ -188,7 +188,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             loadingBar.dismiss();
                             Prevalent.currentOnlineUser = userData;
                             Prevalent.userEmail = email;
-                            startActivity(new Intent(MainActivity.this, HomeActivity.class));
+                            startActivity(new Intent(LoginActivity.this, HomeActivity.class));
 
                         } else {
 
@@ -223,9 +223,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
 
 
-            case R.id.forgotPass_btn:
-
-                break;
         }
     }
 

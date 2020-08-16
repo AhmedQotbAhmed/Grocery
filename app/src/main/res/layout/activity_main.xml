@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".UI.activity.MainActivity"
+    tools:context=".UI.activity.LoginActivity"
     android:background="#2ac17e">
 
 
@@ -36,7 +36,6 @@
         app:layout_constraintVertical_bias="0.269" />
 
     <LinearLayout
-        android:visibility="invisible"
         android:id="@+id/sign_in_content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -115,7 +114,7 @@
             android:layout_marginTop="5dp"
             android:orientation="horizontal"
             android:padding="1dp"
-            android:weightSum="2">
+            android:weightSum="1">
 
             <androidx.appcompat.widget.AppCompatCheckBox
                 android:id="@+id/chBx_RememberMe"
@@ -123,25 +122,13 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="30dp"
-                android:layout_weight="0.9"
+                android:layout_weight="1"
                 android:text="Remember me"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/forgotPass_btn"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="right"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="6dp"
-                android:layout_weight="1.1"
-                android:text="Forgot Password?"
-                android:textColor="@color/colorPrimaryDark"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                tools:ignore="RtlHardcoded" />
+
 
 
         </LinearLayout>
