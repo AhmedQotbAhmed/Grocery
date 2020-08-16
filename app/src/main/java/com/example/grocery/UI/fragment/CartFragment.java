@@ -192,6 +192,7 @@ public class CartFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
+
         FirebaseRecyclerOptions<Products> options_Fruit = new FirebaseRecyclerOptions.Builder<Products>()
                 .setQuery(postReference, Products.class).build();
 //        ConstraintLayout linearhom;
@@ -201,9 +202,20 @@ public class CartFragment extends Fragment {
         recyclerView.setAdapter(adaptor);
 
         adaptor.startListening();
+        if (adaptor.getItemCount() == 0) {
+            // show my background image
+            linearhom.setBackgroundResource(R.drawable.empty);
+
+            // do stuff
+        } else {
+            linearhom.setBackgroundColor(Color.parseColor("#52C0C0C0"));
+            // RecyclerView stuff
+        }
 
 
     }
+
+
 
     @Override
     public void onResume() {
