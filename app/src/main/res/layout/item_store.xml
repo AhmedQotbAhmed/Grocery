@@ -2,12 +2,14 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical" android:layout_width="164dp"
-    android:layout_height="201dp"
-    android:background="#fff"
-
     android:id="@+id/linearLayout_cart"
+    android:layout_width="164dp"
+    android:layout_height="201dp"
     android:layout_marginLeft="5dp"
+
+    android:background="#fff"
+    android:orientation="vertical"
+    android:padding="10dp"
     android:weightSum="3">
 
     <ImageView
@@ -35,13 +37,12 @@
         android:src="@drawable/logo" />
 
 
-
     <TextView
-        android:layout_marginTop="5dp"
-        android:layout_weight="0.4"
         android:id="@+id/product_name_it"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
+        android:layout_marginTop="5dp"
+        android:layout_weight="0.4"
         android:text="Name"
         android:textStyle="bold"
 
@@ -49,14 +50,14 @@
         />
 
     <TextView
-        android:layout_marginTop="5dp"
-        android:layout_weight="0.4"
         android:id="@+id/product_price_it"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
+        android:layout_marginTop="5dp"
+        android:layout_weight="0.4"
         android:text="Price"
-        android:textStyle="bold"
         android:textColor="#C3000000"
+        android:textStyle="bold"
 
         />
 
