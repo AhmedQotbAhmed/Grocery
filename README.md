@@ -1,5 +1,4 @@
 # Grocery
-May 2020 - Present
 Grocery app with all E-commerce Features like Products, Products
 Categories, Cart, Invoices, Checkout.
 
