@@ -9,7 +9,9 @@ Technology Used:
 ● Navigation
 ● Nested RecyclerView
 ● Material Design
+<br/>
 Apk: https://github.com/AhmedQotbAhmed/Grocery/blob/master/Grocery.apk
+<br/>
 Application video:
 https://vimeo.com/431158558
 
