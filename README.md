@@ -10,6 +10,10 @@ Technology Used:
 ● Nested RecyclerView
 ● Material Design
 <br/>
+try with this email and password 
+<br/>
+a@gmail.com    pass :  123456789
+<br/>
 Apk: https://github.com/AhmedQotbAhmed/Grocery/blob/master/Grocery.apk
 <br/>
 Application video:
