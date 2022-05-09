@@ -31,12 +31,11 @@ https://vimeo.com/431158558
     <img src="https://user-images.githubusercontent.com/50117886/167505328-fc1554df-4619-4926-a557-56b1ab2f1afe.jpeg" width="350" title="">
 </p>
 <p align="center">
+  <a> Edit Profile </a>
   <img src="https://user-images.githubusercontent.com/50117886/167505763-a6ee7c3b-6f36-4616-b0aa-f3b7973fe5ed.jpeg" title="Edit Profile">
    <img src="https://user-images.githubusercontent.com/50117886/167505766-2d2122e5-273a-4a50-a446-9936884bf876.jpeg" width="350" title="change password">
     <img src="https://user-images.githubusercontent.com/50117886/167505768-a7d7f256-67cd-432c-a182-df841a19d264.jpeg" width="350" title="profile Info">
 </p>
 
-![8]()
-![9]()
-![7]()
+
 
